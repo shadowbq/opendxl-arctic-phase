@@ -4,6 +4,20 @@
 
 This is a set of configurations and clients to integrate Suricata file carving
 
+### OpenDXL
+
+DXL configuration:
+
+The ArcticPhase client contains a configuration file (dxlclient.config) located in the etc sub-directory that must be populated in order for the Hashes to be able to be looked up on the DXL fabric.
+
+See: https://opendxl.github.io/opendxl-tie-client-python/pydoc/sampleconfig.html
+
+#### TIE
+
+Prerequisites:
+
+* The samples configuration step has been completed (see Samples Configuration)
+* A McAfee Threat Intelligence Exchange (TIE) Service is available on the DXL fabric
 
 ### File Carving using Suricata
 
