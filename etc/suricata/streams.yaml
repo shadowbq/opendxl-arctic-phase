@@ -1,0 +1,11 @@
+stream:
+  memcap: 64mb
+  checksum-validation: yes      # reject wrong csums
+  inline: auto                  # auto will use inline mode in IPS mode, yes or no set it statically
+  reassembly:
+    memcap: 256mb
+    depth: 0                  # reassemble files as big as possible
+    toserver-chunk-size: 2560
+    toclient-chunk-size: 2560
+    randomize-chunk-size: yes
+

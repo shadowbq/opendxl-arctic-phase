@@ -1,0 +1,25 @@
+outputs:
+  - file-store:
+      enabled: yes       # set to yes to enable
+      log-dir: /var/log/suricata/files    # directory to store the files
+      force-magic: yes   # force logging magic on all stored files
+      # force logging of checksums, available hash functions are md5,
+      # sha1 and sha256
+      force-hash: [md5, sha1]
+      force-filestore: yes # force storing of all files
+      # override global stream-depth for sessions in which we want to
+      # perform file extraction. Set to 0 for unlimited.
+      stream-depth: 0
+      #waldo: file.waldo # waldo file to store the file_id across runs
+
+  # output module to log files tracked in a easily parsable json format
+  - file-log:
+      enabled: yes
+      filename: files-json.log
+      append: yes
+      filetype: regular # 'regular', 'unix_stream' or 'unix_dgram'
+
+      force-magic: yes   # force logging magic on all logged files
+      # force logging of checksums, available hash functions are md5,
+      # sha1 and sha256
+      force-hash: [md5, sha1]
