@@ -28,3 +28,20 @@ Suricata 3.2
 
 File Hashes:
 Feature #509: add SHA1 and SHA256 checksum support for files
+
+
+## Invoke
+
+`invoke` is included to run common commands and task listed in `tasks.py`.
+
+```
+$ invoke -l
+Available tasks:
+
+  build       Build the setup.py
+  clean       Clean up docs, bytecode, and extras
+  codestats   Run pycodestyle tests for code stats
+  release     ``version`` should be a string like '0.4' or '1.0'.
+  smell       Run pycodestyle tests
+  test        Run Unit tests
+```

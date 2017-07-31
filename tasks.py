@@ -20,14 +20,14 @@ def clean(docs=False, bytecode=True, extra=''):
         run("rm -rf %s" % pattern)
 
 @task
-def smell():
-    """ Run flake8 PeP8 tests """
-    run("flake8 src")
+def smell(ctx):
+    """ Run pycodestyle tests """
+    run("pycodestyle src")
 
 @task
-def codestats():
-    """ Run flake8 PeP8 tests for code stats """
-    run("flake8 src --statistics -qq")
+def codestats(ctx):
+    """ Run pycodestyle tests for code stats """
+    run("pycodestyle src --statistics -qq")
 
 @task
 def build(docs=False):
@@ -37,7 +37,7 @@ def build(docs=False):
         run("sphinx-build docs docs/_build")
 
 @task(pre=[clean], post=[codestats])
-def test():
+def test(ctx):
     """ Run Unit tests """
     run("cd src && nosetests --rednose test/tests.py test/test_clitools.py")
 

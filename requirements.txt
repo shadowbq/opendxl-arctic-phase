@@ -1,5 +1,5 @@
 ## -----------------------------------
-#  python pip requirements 
+#  python pip requirements
 ## -----------------------------------
 
 
@@ -8,6 +8,7 @@
 
 
 # Toolsets
+pycodestyle
 invoke
 
 # Base
