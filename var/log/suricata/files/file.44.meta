@@ -1,0 +1,18 @@
+TIME:              07/21/2017-13:11:44.718093
+PCAP PKT NUM:      167742
+SRC IP:            178.62.126.102
+DST IP:            10.0.10.29
+PROTO:             6
+SRC PORT:          80
+DST PORT:          57688
+APP PROTO:         http
+HTTP URI:          /a/7z1700.exe
+HTTP HOST:         d.7-zip.org
+HTTP REFERER:      http://www.7-zip.org/download.html
+HTTP USER AGENT:   Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36
+FILENAME:          /a/7z1700.exe
+MAGIC:             PE32 executable (GUI) Intel 80386, for MS Windows
+STATE:             CLOSED
+MD5:               7df38f8124c7e289f28ad936a7645d53
+SHA1:              0310d81a68de440da5b39c064fb114c6b32bf194
+SIZE:              1127895
