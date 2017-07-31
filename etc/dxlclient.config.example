@@ -1,0 +1,7 @@
+[Certs]
+BrokerCertChain=/etc/certs/brokercerts.crt
+CertFile=/etc/certs/client.crt
+PrivateKey=/etc/certs/client.key
+
+[Brokers]
+{2eb98d82-6d61-11e7-2492-000c29e5abcd}={2eb98d82-6d61-11e7-2492-000c29e5abcd};8883;dxl-broker-1.example.com;10.0.0.2
