@@ -10,7 +10,9 @@ import logging
 
 # Config file name.
 CONFIG_FILE_NAME = "dxlclient.config"
-CONFIG_FILE = os.path.dirname(os.path.abspath(__file__)) + "/" + CONFIG_FILE_NAME
+CONFIG_FILE = os.path.dirname(os.path.abspath(__file__)) + "/../etc/" + CONFIG_FILE_NAME
+
+print "Loading configuration from:", CONFIG_FILE
 
 # Enable logging, this will also direct built-in DXL log messages.
 # See - https://docs.python.org/2/howto/logging-cookbook.html

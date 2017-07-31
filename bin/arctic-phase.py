@@ -11,6 +11,8 @@ from dxlclient.client_config import DxlClientConfig
 from dxltieclient import TieClient
 from dxltieclient.constants import HashType
 
+LOCAL_SAMPLES="samples/"
+LOCAL_RESULTS="var/log/suricata/"
 
 # Import common logging and configuration
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../src/")
@@ -33,7 +35,7 @@ with DxlClient(config) as client:
   tie_client = TieClient(client)
 
 
-  with open("files/file.44.meta", 'r') as stream:
+  with open(LOCAL_RESULTS + "files/file.44.meta", 'r') as stream:
     try:
         dataMap = yaml.load(stream)
     except yaml.YAMLError as exc:
