@@ -13,7 +13,7 @@ from dxltieclient.constants import HashType
 
 
 # Import common logging and configuration
-sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/..")
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../src/")
 from common import *
 
 # Configure local logger
@@ -47,14 +47,14 @@ with DxlClient(config) as client:
   print "product items are", dataMap['MD5']
   print "product items are", dataMap['SHA1']
   print "product items are", dataMap['MAGIC']
-  print "=-----------="    
+  print "=-----------="
   print ""
 
   if dataMap['STATE'] == 'CLOSED':
-  
+
     print "the file is closed"
     p = re.compile('PE32')
-    match = p.match(dataMap['MAGIC']) 
+    match = p.match(dataMap['MAGIC'])
     if match:
         print 'Found PE32 file'
         reputation_lookup_dict = \
@@ -69,4 +69,3 @@ with DxlClient(config) as client:
         print 'No Match'
 
 sys.exit(0)
-
