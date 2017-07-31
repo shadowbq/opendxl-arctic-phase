@@ -1,4 +1,4 @@
-# ArticPhase
+# OpenDXL ArticPhase
 
 ## OpenDXL Suricata TIE ATD integration client
 
