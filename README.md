@@ -38,7 +38,7 @@ There are two configuration files required to enable file carving of files up to
 alert http any any -> any any (filemagic:”executable for MS Windows”;)
 ```
 
-Suricata 3.2
+Suricata 3.2 & 4.0 Configs
 
 File Hashes:
 Feature #509: add SHA1 and SHA256 checksum support for files
