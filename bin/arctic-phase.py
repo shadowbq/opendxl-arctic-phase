@@ -107,6 +107,13 @@ def printTIE(reputations_dict):
           print "First contact: " + \
                 FileEnterpriseAttrib.to_localtime_string(
                     ent_rep_attribs[FileEnterpriseAttrib.FIRST_CONTACT])
+  
+  if FileProvider.ATD in reputations_dict: 
+      atd_rep = reputations_dict[FileProvider.ATD]
+      print "ATD (sandbox) trust level: " + \
+        str(atd_rep[ReputationProp.TRUST_LEVEL])
+
+
 
 def addtosuricatablacklist(md5):
   try:
@@ -119,14 +126,18 @@ def addtosuricatablacklist(md5):
 
 
 def calcRep(reputations_dict):
-  # Display the Enterprise reputation information
+  # If there is TIE ENTERPRISE rep, use it, then look at ATD, then GTI. 
   if FileProvider.ENTERPRISE in reputations_dict:
       ent_rep = reputations_dict[FileProvider.ENTERPRISE]
       rep = ent_rep[ReputationProp.TRUST_LEVEL]
       if rep == 0:
-        if FileProvider.GTI in reputations_dict:
-          gti_rep = reputations_dict[FileProvider.GTI]
-          rep = gti_rep[ReputationProp.TRUST_LEVEL]
+        if FileProvider.ATD in reputations_dict:
+          atd_rep = reputations_dict[FileProvider.ATD]
+          rep = atd_rep[ReputationProp.TRUST_LEVEL]
+        if rep == 0:    
+          if FileProvider.GTI in reputations_dict:
+            gti_rep = reputations_dict[FileProvider.GTI]
+            rep = gti_rep[ReputationProp.TRUST_LEVEL]
   else:
     if FileProvider.GTI in reputations_dict:
       gti_rep = reputations_dict[FileProvider.GTI]
@@ -165,14 +176,18 @@ def tieLookup(filename):
                 print "added to blacklist"
                 rep_str = "bad"
             else:
-                print "submit to ATD"
-                rep_str = "unknown"
+                if FileProvider.ATD in reputations_dict:
+                    print "ATD Graded it Medium - Malware.Dynamic"
+                    rep_str = "medium"
+                else:
+                    print "submit to ATD"
+                    rep_str = "unknown"
         else:
             print "good file"
             rep_str = "good"
             
         try:
-            fo = open(filename + rep_str + ".verdict", "w")
+            fo = open(filename + '.' + rep_str + ".verdict", "w")
             fo.write(output)
             fo.close()
         except:
