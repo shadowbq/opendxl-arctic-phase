@@ -1,0 +1,68 @@
+TIE REPUTATIONS
+
+Trust Level		Numeric	Description
+
+(GOOD)
+KNOWN_TRUSTED		-1	It is a trusted file or certificate.
+MOST_LIKELY_TRUSTED	0	It is almost certain that the file or certificate is trusted.
+
+(MAYBE)
+MIGHT_BE_TRUSTED	1	It seems to be a benign file or certificate.
+UNKNOWN			2	The reputation provider has encountered the file or certificate before but the provider can’t determine its reputation at the moment.
+NOT_SET			-2	The file or certificate’s reputation hasn’t been determined yet.
+MIGHT_BE_MALICIOUS	3	It seems to be a suspicious file or certificate.
+
+(BAD)
+MOST_LIKELY_MALICIOUS	4	It is almost certain that the file or certificate is malicious.
+KNOWN_MALICIOUS		5	It is a malicious file or certificate.
+
+
+
+GOALS:
+
+1st PASS
+IDS ONLY
+Watch /var/log/suricata/files/file.*.meta
+On new file
+check if CLOSE
+	CLOSED state file
+	read file into HASH
+		if PE32 / PDF / (Customer specified ARRAY .*)
+		DXL TIE Lookup
+			MD5/SHA1
+		create file.x.verdict.(GOOD|MAYBE|BAD)
+			file.45.meta
+			TIE DATA
+		if malicious append md5 
+			blacklist.list
+	PROC2(iwatch)/ 
+		IF MALICIOUS 
+			file.x.verdict.(malicious) send to eve like.json and syslog the message
+		ELSEIF MAYBE 	
+			(robust-atd-convict)
+			movefile to ATD watchdog folder
+				wait on ATD-robust
+
+			IN MAL Folder
+				
+				With context of file.x.verdict.(malicious) send to eve like.json and syslog the message
+			ELSEIF GOOD
+				end (unless force broadcast)
+		ELSEIF GOOD
+			end (unless force broadcast)
+
+2nd PASS 
+if file in blacklist.list
+	file alarm and/or block (IPS mode)
+
+
+ALT PATH:
+
+Robust Watches a DIR DUMP
+	On new file, DXL QUERY
+		IF KNOWN BAD
+			MOVE TO KNOWN BAD 
+			CREATE TIE DATA.
+				NEW PROX - find file.x.meta, combine TIEDATA SYSlog
+		IF UNKNOWN 
+			SUBMIT TO ATD 
