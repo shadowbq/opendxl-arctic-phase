@@ -15,12 +15,14 @@ from dxlclient.client import DxlClient
 from dxlclient.client_config import DxlClientConfig
 from dxltieclient import TieClient
 from dxltieclient.constants import HashType, ReputationProp, FileProvider, FileEnterpriseAttrib, \
-    CertProvider, CertEnterpriseAttrib
+    CertProvider, CertEnterpriseAttrib, TrustLevel
 
 VERBOSE = 0
 
 LOCAL_SAMPLES="samples/"
 LOCAL_RESULTS="/opt/opendxl-arctic-phase/var/log/suricata/"
+
+BLACKLIST="etc/suricata/blacklist.md5"
 
 # Import common logging and configuration
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../src/")
@@ -106,6 +108,31 @@ def printTIE(reputations_dict):
                 FileEnterpriseAttrib.to_localtime_string(
                     ent_rep_attribs[FileEnterpriseAttrib.FIRST_CONTACT])
 
+def addtosuricatablacklist(md5):
+  try:
+      blacklist_fh = open(BLACKLIST, "a")
+      blacklist_fh.write(md5)
+      blacklist_fh.write("\n")
+      blacklist_fh.close()
+  except:
+      print "suricata blacklist file is not available"
+
+
+def calcRep(reputations_dict):
+  # Display the Enterprise reputation information
+  if FileProvider.ENTERPRISE in reputations_dict:
+      ent_rep = reputations_dict[FileProvider.ENTERPRISE]
+      rep = ent_rep[ReputationProp.TRUST_LEVEL]
+      if rep == 0:
+        if FileProvider.GTI in reputations_dict:
+          gti_rep = reputations_dict[FileProvider.GTI]
+          rep = gti_rep[ReputationProp.TRUST_LEVEL]
+  else:
+    if FileProvider.GTI in reputations_dict:
+      gti_rep = reputations_dict[FileProvider.GTI]
+      rep = gti_rep[ReputationProp.TRUST_LEVEL]
+  return rep   
+
 
 def tieLookup(filename):
   with open(filename, 'r') as stream:
@@ -130,22 +157,31 @@ def tieLookup(filename):
         output = json.dumps(reputations_dict, sort_keys=True, indent=4, separators=(',', ': ')) + "\n"
         verbose(output, 2)
 
+        rep = calcRep(reputations_dict)
+
+        if rep <= TrustLevel.MOST_LIKELY_TRUSTED:
+            if rep <= TrustLevel.MOST_LIKELY_MALICIOUS:
+                addtosuricatablacklist(dataMap['MD5'])
+                print "added to blacklist"
+                rep_str = "bad"
+            else:
+                print "submit to ATD"
+                rep_str = "unknown"
+        else:
+            print "good file"
+            rep_str = "good"
+            
         try:
-            fo = open(filename + ".verdict", "w")
+            fo = open(filename + rep_str + ".verdict", "w")
             fo.write(output)
             fo.close()
         except:
-            print "could not write to directory"
-            
- 
-        printTIE(reputations_dict)
+            print "could not write verdict to directory"
 
+        printTIE(reputations_dict)
 
     else:
         print 'No Match'
-
-
-
 
 
 # Create the client

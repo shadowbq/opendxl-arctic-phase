@@ -1,0 +1,18 @@
+TIME:              07/21/2017-13:11:44.718094
+PCAP PKT NUM:      167743
+SRC IP:            172.1.1.102
+DST IP:            10.0.10.29
+PROTO:             6
+SRC PORT:          80
+DST PORT:          57688
+APP PROTO:         http
+HTTP URI:          /a/win.exe
+HTTP HOST:         bad.org
+HTTP REFERER:      http://www.bad.org/download.html
+HTTP USER AGENT:   Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36
+FILENAME:          /a/bad.exe
+MAGIC:             PE32 executable (GUI) Intel 80386, for MS Windows
+STATE:             CLOSED
+MD5:               745397B18FCCF1D75F5A0BA6C0F5F268
+SHA1:              82AE742F32707D70FB7EF40821CCDAC2989CAB60
+SIZE:              136704
