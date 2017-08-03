@@ -80,3 +80,8 @@ ENV/
 
 etc/certs
 etc/dxlclient.config
+
+#Keep what we got ignore the rest
+var/log/suricata/files
+
+# git update-index  --skip-worktree etc/suricata/blacklist.md5
