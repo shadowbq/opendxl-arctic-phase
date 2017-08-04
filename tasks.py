@@ -39,7 +39,8 @@ def build(docs=False):
 @task(pre=[clean], post=[codestats])
 def test(ctx):
     """ Run Unit tests """
-    run("cd src && nosetests --rednose test/tests.py test/test_clitools.py")
+    #run("nosetests --rednose test/tests.py test/test_clitools.py")
+    run("nosetests --rednose test/tests.py")
 
 @task
 def release(version):
