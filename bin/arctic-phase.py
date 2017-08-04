@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-import yaml
+
+# standard libs
 import sys
 import time
 import re
@@ -8,6 +9,10 @@ import logging
 import os
 import tempfile
 
+# pip libs
+from named_constants import Constants
+
+import yaml
 from watchdog.observers import Observer
 import watchdog.events
 
@@ -17,16 +22,12 @@ from dxltieclient import TieClient
 from dxltieclient.constants import HashType, ReputationProp, FileProvider, FileEnterpriseAttrib, \
     CertProvider, CertEnterpriseAttrib, TrustLevel
 
-VERBOSE = 0
-
-LOCAL_SAMPLES="samples/"
-LOCAL_RESULTS="/opt/opendxl-arctic-phase/var/log/suricata/"
-
-BLACKLIST="etc/suricata/blacklist.md5"
-
-# Import common logging and configuration
+# local libs
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../src/")
 from common import *
+from utils import *
+from const import *
+
 
 # Configure local logger
 logging.getLogger().setLevel(logging.ERROR)
@@ -34,12 +35,6 @@ logger = logging.getLogger(__name__)
 
 # Create DXL configuration from file
 config = DxlClientConfig.create_dxl_config_from_file(CONFIG_FILE)
-
-def verbose(x, y=0):
-    if VERBOSE > y:
-        print x
-    else:
-        0 #No Op
 
 class TIEHandler(watchdog.events.PatternMatchingEventHandler):
 
@@ -55,7 +50,7 @@ class ScanFolder:
   def __init__(self, options={}):
     self.options = options
     #self.path = options.directory
-    self.path = LOCAL_RESULTS + "files/"
+    self.path = Testing.LOCAL_RESULTS + "files/"
     self.event_handler = TIEHandler(patterns=["*.meta"], ignore_patterns=[], ignore_directories=True)
     self.observer = Observer()
     print self.path
@@ -68,7 +63,7 @@ class ScanFolder:
     #os.rmdir(self.temp_dir)
 
   def get_filepaths(self, directory):
-  
+
     file_paths = []
     for root, directories, files in os.walk(directory):
       files = [ f for f in files if not f[0] == '.']
@@ -77,72 +72,7 @@ class ScanFolder:
         filepath = os.path.join(root, filename)
         file_paths.append(filepath)
 
-    return file_paths 
-
-
-def printTIE(reputations_dict):
-  # Display the Global Threat Intelligence (GTI) trust level for the file
-  if FileProvider.GTI in reputations_dict:
-      gti_rep = reputations_dict[FileProvider.GTI]
-      print "Global Threat Intelligence (GTI) trust level: " + \
-            str(gti_rep[ReputationProp.TRUST_LEVEL])
-
-  # Display the Enterprise reputation information
-  if FileProvider.ENTERPRISE in reputations_dict:
-      ent_rep = reputations_dict[FileProvider.ENTERPRISE]
-
-      print "Threat Intelligence Exchange (Local) trust level: " + \
-            str(ent_rep[ReputationProp.TRUST_LEVEL])
-
-      # Retrieve the enterprise reputation attributes
-      ent_rep_attribs = ent_rep[ReputationProp.ATTRIBUTES]
-
-      # Display prevalence (if it exists)
-      if FileEnterpriseAttrib.PREVALENCE in ent_rep_attribs:
-          print "Enterprise prevalence: " + \
-                ent_rep_attribs[FileEnterpriseAttrib.PREVALENCE]
-
-      # Display first contact date (if it exists)
-      if FileEnterpriseAttrib.FIRST_CONTACT in ent_rep_attribs:
-          print "First contact: " + \
-                FileEnterpriseAttrib.to_localtime_string(
-                    ent_rep_attribs[FileEnterpriseAttrib.FIRST_CONTACT])
-  
-  if FileProvider.ATD in reputations_dict: 
-      atd_rep = reputations_dict[FileProvider.ATD]
-      print "ATD (sandbox) trust level: " + \
-        str(atd_rep[ReputationProp.TRUST_LEVEL])
-
-
-
-def addtosuricatablacklist(md5):
-  try:
-      blacklist_fh = open(BLACKLIST, "a")
-      blacklist_fh.write(md5)
-      blacklist_fh.write("\n")
-      blacklist_fh.close()
-  except:
-      print "suricata blacklist file is not available"
-
-
-def calcRep(reputations_dict):
-  # If there is TIE ENTERPRISE rep, use it, then look at ATD, then GTI. 
-  if FileProvider.ENTERPRISE in reputations_dict:
-      ent_rep = reputations_dict[FileProvider.ENTERPRISE]
-      rep = ent_rep[ReputationProp.TRUST_LEVEL]
-      if rep == 0:
-        if FileProvider.ATD in reputations_dict:
-          atd_rep = reputations_dict[FileProvider.ATD]
-          rep = atd_rep[ReputationProp.TRUST_LEVEL]
-        if rep == 0:    
-          if FileProvider.GTI in reputations_dict:
-            gti_rep = reputations_dict[FileProvider.GTI]
-            rep = gti_rep[ReputationProp.TRUST_LEVEL]
-  else:
-    if FileProvider.GTI in reputations_dict:
-      gti_rep = reputations_dict[FileProvider.GTI]
-      rep = gti_rep[ReputationProp.TRUST_LEVEL]
-  return rep   
+    return file_paths
 
 
 def tieLookup(filename):
@@ -185,7 +115,7 @@ def tieLookup(filename):
         else:
             print "good file"
             rep_str = "good"
-            
+
         try:
             fo = open(filename + '.' + rep_str + ".verdict", "w")
             fo.write(output)
@@ -209,13 +139,11 @@ with DxlClient(config) as client:
   tie_client = TieClient(client)
 
   # Watch directory loop
-
   job = ScanFolder()
 
-  try: 
+  try:
       while True:
             time.sleep(1)
   except KeyboardInterrupt:
       job.stop()
       sys.exit(0)
-

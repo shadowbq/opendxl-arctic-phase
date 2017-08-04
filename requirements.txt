@@ -15,6 +15,7 @@ invoke
 dxlclient >= 3.1.0.586
 dxltieclient >= 0.1.0
 
+named_constants==1.0
 PyYAML
 argparse
 pathtools
