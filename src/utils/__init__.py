@@ -17,10 +17,11 @@ def verbose(x, y=0):
     else:
         0 #No Op
 
-def check_md5(value):
-    if len(value) != 32:
-        raise argparse.ArgumentTypeError("%s is an invalid md5 hash value" % value)
-    return value
+def valid_hash(value):
+    if not is_md5(value):
+        if not is_sha1(value):
+            if not is_sha256(value):
+                raise argparse.ArgumentTypeError("%s is an invalid hash (md5|sha1|sha256) value" % value)
 
 def is_sha1(maybe_sha):
     # Check if it is a SHA1
@@ -53,6 +54,12 @@ def is_md5(maybe_md5):
     except ValueError:
         return False
     return True
+
+def slash_dir(value):
+    if value[len(value)-1] != "/":
+        raise argparse.ArgumentTypeError("%s should end in a slash" % value)
+    value = os.path.expanduser(value)
+    return value
 
 def merge_dicts(*dict_args):
     '''

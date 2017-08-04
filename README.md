@@ -4,6 +4,34 @@
 
 This is a set of configurations and clients to integrate Suricata file carving
 
+## Usage
+
+### Hash Lookup
+
+```
+./bin/arctic-phase-hash.py --help
+Loading configuration from: /home/shadowbq/sandbox/foo/opendxl-arctic-phase/src/../etc/dxlclient.config
+usage: arctic-phase-hash.py [-h] [-x DXLCLIENT] -a HASH [--version] [-v | -q]
+
+OpenDXL Arctic Phase - Hash integrations
+
+optional arguments:
+  -h, --help       show this help message and exit
+  --version        show program's version number and exit
+  -v, --verbosity  increase output (v)erbosity
+                   		(default: None)
+  -q, --quiet      (q)uiet all output
+                   		(default: False)
+
+OpenDXL parameters:
+  -x DXLCLIENT     d(x)lclient.config file location
+                   		(default: /etc/dxlclient.config)
+
+Hash parameters:
+  -a HASH          h(a)sh md5|sha1|sha256 to test lookup
+                   		(default: None)
+```
+
 ### OpenDXL
 
 DXL configuration:

@@ -23,6 +23,7 @@ from dxltieclient.constants import HashType, ReputationProp, FileProvider, FileE
     CertProvider, CertEnterpriseAttrib, TrustLevel
 
 # local libs
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../")
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../src/")
 from common import *
 from utils import *

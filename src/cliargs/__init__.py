@@ -1,20 +1,12 @@
 # CLI methods
-
+import sys
 import argparse
 import ConfigParser
 import os.path
-import ratd
-import ratd.utils as utils
 
-from utils import check_md5
-
-
-def slash_dir(value):
-    if value[len(value)-1] != "/":
-        raise argparse.ArgumentTypeError("%s should end in a slash" % value)
-    value = os.path.expanduser(value)
-    return value
-
+# local libs
+import src
+import utils
 
 class CliArgError(Exception):
 
@@ -24,93 +16,40 @@ class CliArgError(Exception):
     def __str__(self):
         return repr(self.value)
 
-
 class CliArgs():
 
     def __init__(self, tool, explicit=None):
+        # Complete Arg Dictionary for Help
         self.arg_dict = {
-            'directory': '(d)irectory to watch for new suricata meta files (fileXX.meta)\n\t\t(default: %(default)s)',
-            'existing': '(e)xisting meta files in directory will be evaluated\n\t\t(default: %(default)s)',
-            'sandbox': '(s) submit unknown samples\n\t\t(default: %(default)s)',
+            'config': '(c)onfiguration file for arctic phase\n\t\t(default: %(default)s)',
+            'hash': 'h(a)sh md5|sha1|sha256 to test lookup\n\t\t(default: %(default)s)',
+            'dxlclient': 'd(x)lclient.config file location\n\t\t(default: %(default)s)',
+            'watch': '(w)atch dir for new suricata meta files (fileXX.meta)\n\t\t(default: %(default)s)',
+            'existing': '(e)xisting meta files in watch directory will be evaluated\n\t\t(default: %(default)s)',
+            'sandbox': '(s)ubmit unknown samples using robust-atd\n\t\t(default: %(default)s)',
+            'sandboxconfig': '(r)robust-config location for sandbox\n\t\t(default: %(default)s)',
             'quiet': '(q)uiet all output\n\t\t(default: %(default)s)',
             'verbosity': 'increase output (v)erbosity\n\t\t(default: %(default)s)'
         }
-        self.description = 'Robust Intel Security ATD Python CLI tool'
+
+        self.description = 'OpenDXL Arctic Phase - Hash integrations'
         self.epilog = ''
-        self.dot_robust = self.dot_robust_helper()
+        self.dot_arctic_phase = self.dot_arctic_phase_helper()
 
         self.parser = argparse.ArgumentParser(epilog=self.epilog, description=self.description, formatter_class=argparse.RawTextHelpFormatter)
 
-        if tool == 'profile':
-            self.auth_args()
-            profile_group = self.parser.add_argument_group('Profile parameters')
-            profile_group.add_argument('-l', required=True, action='store_true', dest='listprofiles', help=self.arg_dict['profiles'])
-
-        elif tool == 'sample':
-            self.auth_args()
-            self.sample_args()
-
-        elif tool == 'search':
-            self.auth_args()
-            self.search_args()
-            self.output_args()
-
-        elif tool == 'reporter':
-            reporter_group = self.parser.add_argument_group('Reporter parameters')
-            reporter_group.add_argument('-o', required=False, action='store', dest='rPrint', default='txt', choices=['txt', 'csv'], help=self.arg_dict['rPrint'])
-            if 'reportdir' in self.dot_robust:
-                reporter_group.add_argument('-r', required=False, action='store', type=slash_dir, default=self.dot_robust['reportdir'], dest='reportdir', help=self.arg_dict['reportdir'])
-            else:
-                reporter_group.add_argument('-r', required=True, action='store', type=slash_dir, dest='reportdir', help=self.arg_dict['reportdir'])
-
-        elif tool == 'watch' or tool == 'convict':
-            self.auth_args()
-
-            watch_group = self.parser.add_argument_group('Watch parameters')
-            watch_group.add_argument('-a', required=True, action='store', dest='analyzer_profile', help=self.arg_dict['analyzer'])
-            watch_group.add_argument('-d', required=True, action='store', dest='directory', help=self.arg_dict['directory'])
-            watch_group.add_argument('-e', required=False, action='store_true', dest='existing', help=self.arg_dict['existing'])
-            # SUPPRESSION flag for hidden submission
-            watch_group.add_argument('--sample', dest='file_to_upload', help=argparse.SUPPRESS)
-
-            if tool == 'convict':
-                convict_group = self.parser.add_argument_group('Convict parameters')
-                if 'severity' in self.dot_robust:
-                    convict_group.add_argument('-y', required=False, action='store', default=self.dot_robust['severity'], dest='severity', help=self.arg_dict['severity'])
-                else:
-                    convict_group.add_argument('-y', required=False, action='store', dest='severity', help=self.arg_dict['severity'])
-
-                if 'cleandir' in self.dot_robust:
-                    convict_group.add_argument('-c', required=False, action='store', type=slash_dir, default=self.dot_robust['cleandir'], dest='cleandir', help=self.arg_dict['cleandir'])
-                else:
-                    convict_group.add_argument('-c', required=True, action='store', type=slash_dir, dest='cleandir', help=self.arg_dict['cleandir'])
-
-                if 'dirtydir' in self.dot_robust:
-                    convict_group.add_argument('-x', required=False, action='store', type=slash_dir, default=self.dot_robust['dirtydir'], dest='dirtydir', help=self.arg_dict['dirtydir'])
-                else:
-                    convict_group.add_argument('-x', required=True, action='store', type=slash_dir, dest='dirtydir', help=self.arg_dict['dirtydir'])
-
-                if 'reportdir' in self.dot_robust:
-                    convict_group.add_argument('-r', required=False, action='store', type=slash_dir, default=self.dot_robust['reportdir'], dest='reportdir', help=self.arg_dict['reportdir'])
-                else:
-                    convict_group.add_argument('-r', required=True, action='store', type=slash_dir, dest='reportdir', help=self.arg_dict['reportdir'])
-
-                if 'errordir' in self.dot_robust:
-                    convict_group.add_argument('-z', required=False, action='store', type=slash_dir, default=self.dot_robust['errordir'], dest='errordir', help=self.arg_dict['errordir'])
-                else:
-                    convict_group.add_argument('-z', required=True, action='store', type=slash_dir, dest='errordir', help=self.arg_dict['errordir'])
-
-                convict_group.add_argument('-t', required=False, action='store', dest='rType', choices=['html', 'txt', 'xml', 'zip', 'json', 'ioc', 'stix', 'pdf', 'sample'], help=self.arg_dict['rType'])
-
-            if 'maxthreads' in self.dot_robust:
-                watch_group.add_argument('-j', required=False, action='store', default=self.dot_robust['maxthreads'], dest='maxthreads', help=self.arg_dict['maxthreads'])
-            else:
-                watch_group.add_argument('-j', required=False, action='store', dest='maxthreads', help=self.arg_dict['maxthreads'])
-
+        # Build Args
+        if tool == 'hash':
+            self.dxl_args()
+            self.hash_args()
+        elif tool == 'watch':
+            self.dxl_args()
+            self.watch_args()
         else:
             raise CliArgError(tool)
+        # Always add common
+        self.unix_common_args()
 
-        self.common_args()
         if explicit is None:
             self.parser.parse_args(namespace=self)
         else:
@@ -138,96 +77,82 @@ class CliArgs():
 
         return dict1
 
-    def dot_robust_helper(self):
-        config = ConfigParser.ConfigParser({})
-        fname = os.path.expanduser("~/.robust")
+    def dot_arctic_phase_helper(self):
+        dxl_defaults = {'dxlclient': '/etc/dxlclient.config'}
+        watch_defaults = {'watch': '/var/log/suricata/files/', 'existing': False, 'sandbox': False, 'sandboxconfig': '~/.robust'}
 
-        auth_defaults = {'user': False, 'password': False}
-        connection_defaults = {'ip': False, 'skipssl': False, 'maxthreads': 1}
-        storage_defaults = {'severity': 3, 'cleandir': '~/robust/clean/', 'dirtydir': '~/robust/malware/', 'reportdir': '~/robust/reports/', 'errordir': '~/robust/errors/'}
+        config = ConfigParser.ConfigParser({})
+        fname = os.path.expanduser("~/.opendxl-arctic-phase")
 
         if os.path.isfile(fname):
             config.read(fname)
-            if config.has_section("auth"):
-                auth = self.config_section_map(config, "auth", auth_defaults)
-                dot_robust_auth = {
-                    'user': auth["user"],
-                    'password':  auth["password"]
+            if config.has_section("opendxl"):
+                opendxl = self.config_section_map(config, "opendxl", dxl_defaults)
+                dot_arctic_phase_opendxl = {
+                    'dxlclient': opendxl["dxlclient"]
                 }
             else:
-                dot_robust_auth = auth_defaults
+                dot_arctic_phase_opendxl = dxl_defaults
 
-            if config.has_section("connection"):
-                connection = self.config_section_map(config, "connection", connection_defaults)
-                dot_robust_connection = {
-                    'ip': connection["ip"],
-                    'skipssl': connection["skipssl"],
-                    'maxthreads': connection["maxthreads"]
+            if config.has_section("watch"):
+                watch = self.config_section_map(config, "watch", watch_defaults)
+                dot_arctic_phase_connection = {
+                    'watch': watch["watch"],
+                    'existing': watch["existing"],
+                    'sandbox': watch["sandbox"],
+                    'sandboxconfig': watch["sandboxconfig"]
                 }
             else:
-                dot_robust_connection = connection_defaults
+                dot_arctic_phase_watch = watch_defaults
 
-            if config.has_section("storage"):
-                storage = self.config_section_map(config, "storage", storage_defaults)
-                dot_robust_storage = {
-                    'severity': storage["severity"],
-                    'cleandir': storage["cleandir"],
-                    'dirtydir': storage["dirtydir"],
-                    'reportdir': storage["reportdir"],
-                    'errordir': storage["errordir"]
-                }
-            else:
-                dot_robust_storage = storage_defaults
-
-            dot_robust_dict = utils.merge_dicts(dot_robust_auth, dot_robust_connection, dot_robust_storage)
+            # config file present, merge sections
+            dot_arctic_phase_dict = utils.merge_dicts(dot_arctic_phase_opendxl, dot_arctic_phase_watch)
         else:
-            dot_robust_dict = utils.merge_dicts(auth_defaults, connection_defaults, storage_defaults)
-        return dot_robust_dict
 
-    def common_args(self):
-        self.parser.add_argument('--version', action='version', version=ratd.__version__)
+            # No config file, just merge default dicts
+            dot_arctic_phase_dict = utils.merge_dicts(dxl_defaults, watch_defaults)
+        return dot_arctic_phase_dict
+
+    def unix_common_args(self):
+        self.parser.add_argument('--version', action='version', version=src.__version__)
 
         exclusive = self.parser.add_mutually_exclusive_group()
         exclusive.add_argument('-v', "--verbosity", action="count", help=self.arg_dict['verbosity'])
         exclusive.add_argument('-q', "--quiet", required=False, action='store_true', dest='quiet', help=self.arg_dict['quiet'])
 
-    def auth_args(self):
+    def dxl_args(self):
 
-        auth_group = self.parser.add_argument_group('Authentication parameters')
+        dxl_group = self.parser.add_argument_group('OpenDXL parameters')
 
-        if self.dot_robust['user']:
-            auth_group.add_argument('-u', required=False, action='store', default=self.dot_robust['user'], dest='user', help=self.arg_dict['user'], metavar='USER')
+        if self.dot_arctic_phase['dxlclient']:
+            dxl_group.add_argument('-x', required=False, action='store', default=self.dot_arctic_phase['dxlclient'], dest='dxlclient', help=self.arg_dict['dxlclient'])
         else:
-            auth_group.add_argument('-u', required=True, action='store', dest='user', help=self.arg_dict['user'], metavar='USER')
+            dxl_group.add_argument('-x', required=True, action='store', dest='dxlclient', help=self.arg_dict['dxlclient'])
 
-        if self.dot_robust['password']:
-            auth_group.add_argument('-p', required=False, action='store', default=self.dot_robust['password'], dest='password', help=self.arg_dict['password_secured'], metavar='PASSWORD')
+    def hash_args(self):
+
+        hash_group = self.parser.add_argument_group('Hash parameters')
+        hash_group.add_argument('-a', required=True, type=utils.valid_hash, action='store', dest='hash', help=self.arg_dict['hash'])
+
+    def watch_args(self):
+
+        watch_group = self.parser.add_argument_group('Watch parameters')
+        if self.dot_arctic_phase['watch']:
+            watch_group.add_argument('-w', required=False, action='store', default=self.dot_arctic_phase['watch'], dest='watch', help=self.arg_dict['watch'])
         else:
-            auth_group.add_argument('-p', required=False, action='store', dest='password', help=self.arg_dict['password'], metavar='PASSWORD')
+            watch_group.add_argument('-w', required=True, action='store', dest='watch', help=self.arg_dict['watch'])
 
-        if self.dot_robust['ip']:
-            auth_group.add_argument('-i', required=False, action='store', default=self.dot_robust['ip'], dest='ip', help=self.arg_dict['ip'], metavar='ATD IP')
+        if self.dot_arctic_phase['existing']:
+            watch_group.add_argument('-e', required=False, action='store_true', default=self.dot_arctic_phase['existing'], dest='existing', help=self.arg_dict['existing'])
         else:
-            auth_group.add_argument('-i', required=True, action='store', dest='ip', help=self.arg_dict['ip'], metavar='ATD IP')
+            watch_group.add_argument('-e', required=False, action='store_true', dest='existing', help=self.arg_dict['existing'])
 
-        if self.dot_robust['skipssl']:
-            auth_group.add_argument('-n', required=False, action='store_true', default=self.dot_robust['skipssl'], dest='skipssl', help=self.arg_dict['skipssl'])
+        if self.dot_arctic_phase['sandbox']:
+            watch_group.add_argument('-w', required=False, action='store_true', default=self.dot_arctic_phase['sandbox'], dest='sandbox', help=self.arg_dict['sandbox'])
         else:
-            auth_group.add_argument('-n', required=False, action='store_true', dest='skipssl', help=self.arg_dict['skipssl'])
+            watch_group.add_argument('-w', required=False, action='store_true', dest='sandbox', help=self.arg_dict['sandbox'])
 
-    def sample_args(self):
-
-        sample_group = self.parser.add_argument_group('Sample parameters')
-        sample_group.add_argument('-s', required=True, action='store', dest='file_to_upload', help=self.arg_dict['sample'])
-        sample_group.add_argument('-a', required=True, action='store', dest='analyzer_profile', help=self.arg_dict['analyzer'])
-
-    def search_args(self):
-
-        search_group = self.parser.add_argument_group('Search parameters')
-        search_group.add_argument('-m', required=True, type=check_md5, action='store', dest='md5', help=self.arg_dict['md5'])
-
-    def output_args(self):
-
-        output_group = self.parser.add_argument_group('Reporting parameters')
-        output_group.add_argument('-t', required=False, action='store', dest='rType', choices=['html', 'txt', 'xml', 'zip', 'json', 'ioc', 'stix', 'pdf', 'sample'], help=self.arg_dict['rType'])
-        output_group.add_argument('-f', required=False, action='store', dest='filename', help=self.arg_dict['filename'])
+        if self.dot_arctic_phase['sandboxconfig']:
+            watch_group.add_argument('-r', required=False, action='store', default=self.dot_arctic_phase['sandboxconfig'], dest='sandboxconfig', help=self.arg_dict['sandboxconfig'])
+        else:
+            watch_group.add_argument('-r', required=True, action='store', dest='sandboxconfig', help=self.arg_dict['sandboxconfig'])

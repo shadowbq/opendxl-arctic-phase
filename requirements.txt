@@ -6,6 +6,8 @@
 ##
 #-e .[docs,test]
 
+# PipDeps
+named_constants
 
 # Toolsets
 pycodestyle
