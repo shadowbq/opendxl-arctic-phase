@@ -46,4 +46,4 @@ if __name__ == '__main__':
       # Connect to the fabric
       client.connect()
       sample = TieSubmit(options, client)
-      print sample.tieResponse
+      print sample.tieResponse()

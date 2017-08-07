@@ -33,9 +33,10 @@ class TieSubmit():
             return "not a valid file hash"
         return reputations_dict
 
-    def _getFileProps(self, fileProps=self.reputations_dict):
+    def _getFileProps(self):
         # Get File Properties and Map with Providers and TIE Score
         propList = []
+        fileProps = self.reputations_dict
 
         if FileProvider.GTI in fileProps:
             propDict = {}
