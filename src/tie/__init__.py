@@ -14,67 +14,22 @@ class TieSubmit():
         print "TIE CLIENT"
         # Create the McAfee Threat Intelligence Exchange (TIE) client
         tie_client = TieClient(dxlclient)
+        reputations_dict = getFileRep(tie_client, options.hash)
+        repp = calcRep(reputations_dict)
+        printTIE(repp)
 
-
-
-def getFileProps(fileProps):
-    # Get File Properties and Map with Providers and TIE Score
-    propList = []
-
-    if FileProvider.GTI in fileProps:
-        propDict = {}
-        propDict['provider'] = providerMap[fileProps[FileProvider.GTI]['providerId']]
-        propDict['reputation'] = tiescoreMap[fileProps[FileProvider.GTI]['trustLevel']]
-        propDict['createDate'] = fileProps[FileProvider.GTI]['createDate']
-        propList.append(propDict)
-
-    if FileProvider.ENTERPRISE in fileProps:
-        propDict = {}
-        propDict['provider'] = providerMap[fileProps[FileProvider.ENTERPRISE]['providerId']]
-        propDict['reputation'] = tiescoreMap[fileProps[FileProvider.ENTERPRISE]['trustLevel']]
-        propDict['createDate'] = fileProps[FileProvider.ENTERPRISE]['createDate']
-        propList.append(propDict)
-
-    if FileProvider.ATD in fileProps:
-        propDict = {}
-        propDict['provider'] = providerMap[fileProps[FileProvider.ATD]['providerId']]
-        propDict['reputation'] = tiescoreMap[fileProps[FileProvider.ATD]['trustLevel']]
-        propDict['createDate'] = fileProps[FileProvider.ATD]['createDate']
-        propList.append(propDict)
-
-    if FileProvider.MWG in fileProps:
-        propDict = {}
-        propDict['provider'] = providerMap[fileProps[FileProvider.MWG]['providerId']]
-        propDict['reputation'] = tiescoreMap[fileProps[FileProvider.MWG]['trustLevel']]
-        propDict['createDate'] = fileProps[FileProvider.MWG]['createDate']
-        propList.append(propDict)
-
-    return propList
-
-def getFileRep(tie_client, md5=None, sha1=None, sha256=None):
-    if md5 == None and sha1 == None and sha256 == None:
+def getFileRep(tie_client, hash=None):
+    if hash == None:
         return "no file hash"
     else:
-        # Verify SHA1 string
-        if sha1 != None:
-            if not is_sha1(sha1):
-                return "invalid sha1"
-            else:
-                reputations_dict = tie_client.get_file_reputation({HashType.SHA1: sha1})
-
-        # Verify SHA256 string
-        if sha256 != None:
-            if not is_sha256(sha256):
-                return "invalid sha256"
-            else:
-                reputations_dict = tie_client.get_file_reputation({HashType.SHA256: sha256})
-
-        if md5 != None:
-            if not is_md5(md5):
-                return "invalid md5"
-            else:
-                reputations_dict = tie_client.get_file_reputation({HashType.MD5: md5})
-
+        if is_sha1(sha1):
+            reputations_dict = tie_client.get_file_reputation({HashType.SHA1: sha1})
+        elif is_sha256(sha256):
+            reputations_dict = tie_client.get_file_reputation({HashType.SHA256: sha256})
+        elif is_md5(md5):
+            reputations_dict = tie_client.get_file_reputation({HashType.MD5: md5})
+        else:
+            return "not a valid hash"
         return reputations_dict
 
 def calcRep(reputations_dict):
@@ -102,7 +57,6 @@ def calcRep(reputations_dict):
       gti_rep = reputations_dict[FileProvider.GTI]
       rep = gti_rep[ReputationProp.TRUST_LEVEL]
   return rep
-
 
 def printTIE(reputations_dict):
   # Display the Global Threat Intelligence (GTI) trust level for the file
@@ -141,3 +95,39 @@ def printTIE(reputations_dict):
       mwg_rep = reputations_dict[FileProvider.MWG]
       print "MWG (WebGatewayy) trust level: " + \
         str(mwg_rep[ReputationProp.TRUST_LEVEL])
+
+### ~ BREAK ~ ####
+
+def getFileProps(fileProps):
+    # Get File Properties and Map with Providers and TIE Score
+    propList = []
+
+    if FileProvider.GTI in fileProps:
+        propDict = {}
+        propDict['provider'] = providerMap[fileProps[FileProvider.GTI]['providerId']]
+        propDict['reputation'] = tiescoreMap[fileProps[FileProvider.GTI]['trustLevel']]
+        propDict['createDate'] = fileProps[FileProvider.GTI]['createDate']
+        propList.append(propDict)
+
+    if FileProvider.ENTERPRISE in fileProps:
+        propDict = {}
+        propDict['provider'] = providerMap[fileProps[FileProvider.ENTERPRISE]['providerId']]
+        propDict['reputation'] = tiescoreMap[fileProps[FileProvider.ENTERPRISE]['trustLevel']]
+        propDict['createDate'] = fileProps[FileProvider.ENTERPRISE]['createDate']
+        propList.append(propDict)
+
+    if FileProvider.ATD in fileProps:
+        propDict = {}
+        propDict['provider'] = providerMap[fileProps[FileProvider.ATD]['providerId']]
+        propDict['reputation'] = tiescoreMap[fileProps[FileProvider.ATD]['trustLevel']]
+        propDict['createDate'] = fileProps[FileProvider.ATD]['createDate']
+        propList.append(propDict)
+
+    if FileProvider.MWG in fileProps:
+        propDict = {}
+        propDict['provider'] = providerMap[fileProps[FileProvider.MWG]['providerId']]
+        propDict['reputation'] = tiescoreMap[fileProps[FileProvider.MWG]['trustLevel']]
+        propDict['createDate'] = fileProps[FileProvider.MWG]['createDate']
+        propList.append(propDict)
+
+    return propList
