@@ -17,11 +17,11 @@ class TieSubmit():
         tie_client = TieClient(dxlclient)
         reputations_dict = getFileRep(tie_client, options.hash)
         content = getFileProps(reputations_dict)
-        tieResponse(content)
+        tieResponse(content, options.hash)
         print "######"
         printTIE(reputations_dict)
         calcRep(reputations_dict)
-        
+
 
 def getFileRep(tie_client, file_hash=None):
     if file_hash == None:
@@ -101,7 +101,7 @@ def printTIE(reputations_dict):
       print "MWG (WebGatewayy) trust level: " + \
         str(mwg_rep[ReputationProp.TRUST_LEVEL])
 
-def tieResponse(content):
+def tieResponse(content, myHash):
     rtv_string = "File Hash *" + myHash + "* Reputation\n"
     # Format a String Response
     i = 1
