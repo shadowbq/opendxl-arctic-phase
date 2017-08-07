@@ -41,7 +41,7 @@ if __name__ == '__main__':
     dxlconfig = DxlConfigWrapper(options)
 
     # Create the client
-    with DxlClient(dxlconfig) as client:
+    with DxlClient(dxlconfig.config) as client:
       # Connect to the fabric
       client.connect()
       sample = TieSubmit(options, client)

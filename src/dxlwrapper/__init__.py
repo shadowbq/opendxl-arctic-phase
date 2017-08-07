@@ -4,7 +4,7 @@ from dxlclient.client import DxlClient
 from dxlclient.client_config import DxlClientConfig
 
 # Options wrapper for DXLClientConfig
-class DxlConfigWrapper():
+class DxlConfigWrapper(object):
 
     def __init__(self, options):
         print("__init__")
@@ -18,4 +18,7 @@ class DxlConfigWrapper():
         print "Loading configuration from:", CONFIG_FILE
         # Create DXL configuration from file
         self.config = DxlClientConfig.create_dxl_config_from_file(CONFIG_FILE)
-        return self.config
+
+    @property
+    def config(self):
+        return self._config
