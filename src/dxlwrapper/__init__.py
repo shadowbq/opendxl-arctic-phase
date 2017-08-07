@@ -3,6 +3,7 @@ import os
 from dxlclient.client import DxlClient
 from dxlclient.client_config import DxlClientConfig
 
+# Options wrapper for DXLClientConfig
 class DxlConfigWrapper():
 
     def __init__(self, options):

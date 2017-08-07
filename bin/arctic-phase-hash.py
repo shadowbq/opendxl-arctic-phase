@@ -38,8 +38,8 @@ if __name__ == '__main__':
         utils.license()
 
     # Options wrapper for DXLClientConfig
-    dxlconfig = DxlClientWrapper(options)
-    
+    dxlconfig = DxlConfigWrapper(options)
+
     # Create the client
     with DxlClient(dxlconfig) as client:
       # Connect to the fabric
