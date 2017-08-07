@@ -107,7 +107,7 @@ def tieResponse(content, myHash):
     i = 1
     for key in content:
         rtv_string = rtv_string + "*Provider: " + key['provider'] + "*\n"
-        rtv_string = rtv_string + "Creation Date: " + convertEpoc(key['createDate']) + "\n"
+        rtv_string = rtv_string + "Creation Date: " + utils.time_to_str(key['createDate']) + "\n"
         rtv_string = rtv_string + "Reputation: " + key['reputation'] + "\n"
         rtv_string += "\n"
         i += 1

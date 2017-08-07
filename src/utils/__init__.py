@@ -17,6 +17,8 @@ def verbose(x, y=0):
     else:
         0 #No Op
 
+def time_to_str(myTime):
+    return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(myTime))
 #Validators
 def valid_hash(value):
     if not utils.is_md5(value):
