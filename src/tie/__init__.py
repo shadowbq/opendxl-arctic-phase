@@ -17,8 +17,8 @@ class TieSubmit():
         self.file_hash = options.hash
         if self.file_hash == None:
             return "no file hash"
-        self.reputations_dict = _getFileRep()
-        self.content = _getFileProps()
+        self.reputations_dict = self._getFileRep()
+        self.content = self._getFileProps()
         #printTIE(reputations_dict)
         #calcRep(reputations_dict)
 
