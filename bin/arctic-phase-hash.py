@@ -22,6 +22,7 @@ from common import *
 from utils import *
 from const import *
 from dxlwrapper import DxlConfigWrapper
+from dxlclient.client import DxlClient
 from tie import TieSubmit
 from cliargs import CliArgs
 
