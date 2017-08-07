@@ -10,17 +10,8 @@ import os
 import tempfile
 
 # pip libs
-from named_constants import Constants
-
 import yaml
-
-
-from dxlclient.client import DxlClient
-from dxlclient.client_config import DxlClientConfig
-from dxltieclient import TieClient
-from dxltieclient.constants import HashType, ReputationProp, FileProvider, FileEnterpriseAttrib, \
-    CertProvider, CertEnterpriseAttrib, TrustLevel
-
+from named_constants import Constants
 
 
 # local libs
@@ -30,12 +21,11 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../src/")
 from common import *
 from utils import *
 from const import *
+from dxlwrapper import DXLClientWrapper
+from tie import TieSubmit
 from cliargs import CliArgs
 
-
-EXIT_SUCCESS = 0
-EXIT_FAILURE = 1
-
+#import code; code.interact(local=dict(globals(), **locals()))
 
 if __name__ == '__main__':
     # Get the list of parameters passed from command line
@@ -45,10 +35,8 @@ if __name__ == '__main__':
         options.hash = raw_input("File Hash: ")
 
     if options.verbosity:
-        utils.copyleftnotice()
+        utils.license()
 
-    sample = SampleSubmit(options)
-    severity = sample.rtnv
-    md5 = sample.rtv_md5
-
-    sys.exit(severity)
+    client = DXLClientWrapper(options)
+    with client.connect() as dxlconnection:
+        sample = TieSubmit(options, dxlconnection)

@@ -1,10 +1,20 @@
 # TIE Methods
+from dxltieclient import TieClient
+from dxltieclient.constants import HashType, ReputationProp, FileProvider, FileEnterpriseAttrib, \
+    CertProvider, CertEnterpriseAttrib, TrustLevel
 
 # TIE Reputation Average Map
 tiescoreMap = {0: 'Not Set', 1: 'Known Malicious', 15: 'Most Likely Malicious', 30: 'Might Be Malicious', 50: 'Unknown',
                70: "Might Be Trusted", 85: "Most Likely Trusted", 99: "Known Trusted", 100: "Known Trusted Installer"}
 # TIE Provider Map
 providerMap = {1: 'GTI', 3: 'Enterprise Reputation', 5: 'ATD', 7: "MWG"}
+
+class TieSubmit():
+    def __init__(self, options, dxlclient):
+        print "TIE CLIENT"
+        # Create the McAfee Threat Intelligence Exchange (TIE) client
+        tie_client = TieClient(dxlclient)
+
 
 
 def getFileProps(fileProps):
@@ -41,21 +51,6 @@ def getFileProps(fileProps):
 
     return propList
 
-
-def getTieRep(tie_client, md5, sha1, sha256, ):
-
-    #
-    # Request and display reputation for notepad.exe
-    #
-    if md5:
-        reputations_dict = tie_client.get_file_reputation({HashType.MD5: md5})
-    if sha1:
-        reputations_dict = tie_client.get_file_reputation({HashType.SHA1: sha1})
-    if sha256:
-        reputations_dict = tie_client.get_file_reputation({HashType.SHA256: sha256})
-
-    return reputations_dict
-
 def getFileRep(tie_client, md5=None, sha1=None, sha256=None):
     if md5 == None and sha1 == None and sha256 == None:
         return "no file hash"
@@ -64,17 +59,23 @@ def getFileRep(tie_client, md5=None, sha1=None, sha256=None):
         if sha1 != None:
             if not is_sha1(sha1):
                 return "invalid sha1"
+            else:
+                reputations_dict = tie_client.get_file_reputation({HashType.SHA1: sha1})
 
         # Verify SHA256 string
         if sha256 != None:
             if not is_sha256(sha256):
                 return "invalid sha256"
+            else:
+                reputations_dict = tie_client.get_file_reputation({HashType.SHA256: sha256})
 
         if md5 != None:
             if not is_md5(md5):
                 return "invalid md5"
+            else:
+                reputations_dict = tie_client.get_file_reputation({HashType.MD5: md5})
 
-        return getTieRep(tie_client, md5, sha1, sha256)
+        return reputations_dict
 
 def calcRep(reputations_dict):
   # Return a Summary Cascade 0-100 Value for Reputation.

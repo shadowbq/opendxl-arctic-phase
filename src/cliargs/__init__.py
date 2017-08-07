@@ -8,6 +8,15 @@ import os.path
 import src
 import utils
 
+#Validators
+def valid_cli_hash(value):
+    if not utils.is_md5(value):
+        if not utils.is_sha1(value):
+            if not utils.is_sha256(value):
+                raise argparse.ArgumentTypeError("%s is an invalid hash (md5|sha1|sha256) value" % value)
+    return value
+
+# CLI Tools
 class CliArgError(Exception):
 
     def __init__(self, value):
@@ -49,6 +58,8 @@ class CliArgs():
             raise CliArgError(tool)
         # Always add common
         self.unix_common_args()
+
+        #import code; code.interact(local=dict(globals(), **locals()))
 
         if explicit is None:
             self.parser.parse_args(namespace=self)
@@ -122,7 +133,7 @@ class CliArgs():
 
     def dxl_args(self):
 
-        dxl_group = self.parser.add_argument_group('OpenDXL parameters')
+        dxl_group = self.parser.add_argument_group('OpenDXL parametervalid_hashs')
 
         if self.dot_arctic_phase['dxlclient']:
             dxl_group.add_argument('-x', required=False, action='store', default=self.dot_arctic_phase['dxlclient'], dest='dxlclient', help=self.arg_dict['dxlclient'])
@@ -132,7 +143,7 @@ class CliArgs():
     def hash_args(self):
 
         hash_group = self.parser.add_argument_group('Hash parameters')
-        hash_group.add_argument('-a', required=True, type=utils.valid_hash, action='store', dest='hash', help=self.arg_dict['hash'])
+        hash_group.add_argument('-a', required=True, type=valid_cli_hash, action='store', dest='hash', help=self.arg_dict['hash'], metavar = "HASH")
 
     def watch_args(self):
 
