@@ -1,4 +1,5 @@
 # TIE Methods
+from utils import *
 from dxltieclient import TieClient
 from dxltieclient.constants import HashType, ReputationProp, FileProvider, FileEnterpriseAttrib, \
     CertProvider, CertEnterpriseAttrib, TrustLevel
@@ -18,18 +19,18 @@ class TieSubmit():
         repp = calcRep(reputations_dict)
         printTIE(repp)
 
-def getFileRep(tie_client, hash=None):
-    if hash == None:
+def getFileRep(tie_client, file_hash=None):
+    if file_hash == None:
         return "no file hash"
     else:
-        if is_sha1(sha1):
-            reputations_dict = tie_client.get_file_reputation({HashType.SHA1: sha1})
-        elif is_sha256(sha256):
-            reputations_dict = tie_client.get_file_reputation({HashType.SHA256: sha256})
-        elif is_md5(md5):
-            reputations_dict = tie_client.get_file_reputation({HashType.MD5: md5})
+        if utils.is_sha1(file_hash):
+            reputations_dict = tie_client.get_file_reputation({HashType.SHA1: file_hash})
+        elif utils.is_sha256(file_hash):
+            reputations_dict = tie_client.get_file_reputation({HashType.SHA256: file_hash})
+        elif utils.is_md5(file_hash):
+            reputations_dict = tie_client.get_file_reputation({HashType.MD5: file_hash})
         else:
-            return "not a valid hash"
+            return "not a valid file hash"
         return reputations_dict
 
 def calcRep(reputations_dict):
