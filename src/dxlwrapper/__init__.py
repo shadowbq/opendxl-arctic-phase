@@ -17,7 +17,7 @@ class DxlConfigWrapper(object):
 
         print "Loading configuration from:", CONFIG_FILE
         # Create DXL configuration from file
-        self.config = DxlClientConfig.create_dxl_config_from_file(CONFIG_FILE)
+        self._config = DxlClientConfig.create_dxl_config_from_file(CONFIG_FILE)
 
     @property
     def config(self):
