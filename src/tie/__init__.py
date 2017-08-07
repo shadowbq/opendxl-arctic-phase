@@ -15,7 +15,7 @@ class TieSubmit():
         # Create the McAfee Threat Intelligence Exchange (TIE) client
         self.tie_client = TieClient(dxlclient)
         self.file_hash = options.hash
-        if file_hash == None:
+        if self.file_hash == None:
             return "no file hash"
         self.reputations_dict = _getFileRep()
         self.content = _getFileProps()
