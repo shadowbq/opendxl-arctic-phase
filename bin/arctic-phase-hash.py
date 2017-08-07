@@ -21,7 +21,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../src/")
 from common import *
 from utils import *
 from const import *
-from dxlwrapper import DXLClientWrapper
+from dxlwrapper import DxlConfigWrapper
 from tie import TieSubmit
 from cliargs import CliArgs
 
@@ -37,6 +37,11 @@ if __name__ == '__main__':
     if options.verbosity:
         utils.license()
 
-    client = DXLClientWrapper(options)
-    with client.connect() as dxlconnection:
-        sample = TieSubmit(options, dxlconnection)
+    # Options wrapper for DXLClientConfig
+    dxlconfig = DxlClientWrapper(options)
+    
+    # Create the client
+    with DxlClient(dxlconfig) as client:
+      # Connect to the fabric
+      client.connect()
+      sample = TieSubmit(options, client)
