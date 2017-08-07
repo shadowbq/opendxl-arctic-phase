@@ -1,5 +1,5 @@
 # TIE Methods
-from utils import *
+import utils
 from dxltieclient import TieClient
 from dxltieclient.constants import HashType, ReputationProp, FileProvider, FileEnterpriseAttrib, \
     CertProvider, CertEnterpriseAttrib, TrustLevel
