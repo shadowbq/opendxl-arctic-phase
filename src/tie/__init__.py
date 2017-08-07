@@ -17,7 +17,7 @@ class TieSubmit():
         tie_client = TieClient(dxlclient)
         reputations_dict = getFileRep(tie_client, options.hash)
         content = getFileProps(reputations_dict)
-        tieResponse(content, options.hash)
+        print tieResponse(content, options.hash)
         print "######"
         printTIE(reputations_dict)
         calcRep(reputations_dict)
