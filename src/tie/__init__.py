@@ -16,8 +16,12 @@ class TieSubmit():
         # Create the McAfee Threat Intelligence Exchange (TIE) client
         tie_client = TieClient(dxlclient)
         reputations_dict = getFileRep(tie_client, options.hash)
-        repp = calcRep(reputations_dict)
-        printTIE(repp)
+        content = getFileProps(reputations_dict)
+        tieResponse(content)
+        print "######"
+        printTIE(reputations_dict)
+        calcRep(reputations_dict)
+        
 
 def getFileRep(tie_client, file_hash=None):
     if file_hash == None:
@@ -96,6 +100,20 @@ def printTIE(reputations_dict):
       mwg_rep = reputations_dict[FileProvider.MWG]
       print "MWG (WebGatewayy) trust level: " + \
         str(mwg_rep[ReputationProp.TRUST_LEVEL])
+
+def tieResponse(content):
+    rtv_string = "File Hash *" + myHash + "* Reputation\n"
+    # Format a String Response
+    i = 1
+    for key in content:
+        rtv_string = rtv_string + "*Provider: " + key['provider'] + "*\n"
+        rtv_string = rtv_string + "Creation Date: " + convertEpoc(key['createDate']) + "\n"
+        rtv_string = rtv_string + "Reputation: " + key['reputation'] + "\n"
+        rtv_string += "\n"
+        i += 1
+
+    return rtv_string
+
 
 ### ~ BREAK ~ ####
 
