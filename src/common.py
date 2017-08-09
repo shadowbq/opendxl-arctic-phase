@@ -9,6 +9,6 @@ console_handler.setFormatter(log_formatter)
 
 logger = logging.getLogger()
 logger.addHandler(console_handler)
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.ERROR)
 
 logger.info("logger initialized and loaded")

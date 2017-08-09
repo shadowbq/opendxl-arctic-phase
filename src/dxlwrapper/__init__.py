@@ -6,8 +6,6 @@ from dxlclient.client_config import DxlClientConfig
 class DxlConfigWrapper(object):
 
     def __init__(self, options):
-        print("__init__")
-
         # Config file name.
         self.options = options
         self.connection = None
