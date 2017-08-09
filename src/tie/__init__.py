@@ -99,6 +99,9 @@ class TieSubmit():
       # Return a Summary Cascade 0-100 Value for Reputation.
       # OOP: Enterprise -> ATD -> MWG -> GTI
 
+      #TODO: create property sample.combined_reputation_str
+      #TODO: create property sample.combined_reputation
+
       reputations_dict = self.reputations_dict
 
       # If there is TIE ENTERPRISE rep, use it, then look at ATD, then GTI.

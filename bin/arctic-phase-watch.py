@@ -45,7 +45,7 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
         #TODO: refactor this ..extract properties etc.
         self.combined_reputation = sample.calcRep()
         self.sideeffects(sample.reputations_dict)
-        self.create_verdict(event.src_path)
+        self.create_verdict(event.src_path, sample.reputations_dict)
         #except:
         #  print "invalid file"
 
@@ -81,10 +81,11 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
         else:
             logger.info("good file")
 
-    def create_verdict(self, filename):
+    def create_verdict(self, filename, reputations_dict):
 
         try:
             fo = open(filename + '.' + self.combined_reputation[1] + ".verdict", "w")
+            output = json.dumps(reputations_dict, sort_keys=True, indent=4, separators=(',', ': ')) + "\n"
             fo.write(output)
             fo.close()
         except:
