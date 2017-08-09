@@ -34,6 +34,9 @@ if __name__ == '__main__':
 
     if options.filehash is None:
         options.filehash = raw_input("File Hash: ")
+        # this should exit with string
+        utils.valid_hash(options.filehash)
+
 
     if options.verbosity:
         utils.license()
