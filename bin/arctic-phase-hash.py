@@ -18,6 +18,8 @@ from named_constants import Constants
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../")
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../src/")
 
+import utils
+
 from common import *
 from utils import *
 from const import *
