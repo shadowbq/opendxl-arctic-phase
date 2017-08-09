@@ -2,6 +2,9 @@ import os
 import json
 import re
 import yaml
+
+from common import *
+
 from watchdog.observers import Observer
 import watchdog.events
 
