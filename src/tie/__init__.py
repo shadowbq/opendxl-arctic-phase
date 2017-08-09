@@ -89,9 +89,14 @@ class TieSubmit():
 
         return propList
 
-    def calcRep(self, reputations_dict):
+    #TODO: stupid name.. rename it combined_reputation
+    #INFO: this returns an array 0 is the val 1 is the str
+    def calcRep(self):
+
       # Return a Summary Cascade 0-100 Value for Reputation.
       # OOP: Enterprise -> ATD -> MWG -> GTI
+
+      reputations_dict = self.reputations_dict
 
       # If there is TIE ENTERPRISE rep, use it, then look at ATD, then GTI.
       if FileProvider.ENTERPRISE in reputations_dict:
