@@ -81,7 +81,7 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
         else:
             logger.info("good file")
 
-    def create_verdict(self):
+    def create_verdict(self, filename):
 
         try:
             fo = open(filename + '.' + self.combined_reputation[1] + ".verdict", "w")
