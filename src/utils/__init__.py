@@ -22,9 +22,9 @@ def time_to_str(myTime):
     return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(myTime))
 #Validators
 def valid_hash(value):
-    if not utils.is_md5(value):
-        if not utils.is_sha1(value):
-            if not utils.is_sha256(value):
+    if not is_md5(value):
+        if not is_sha1(value):
+            if not is_sha256(value):
                 raise ("%s is an invalid hash (md5|sha1|sha256) value" % value)
     return value
 
