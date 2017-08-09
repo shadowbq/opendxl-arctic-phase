@@ -63,8 +63,7 @@ class ScanFolder:
 
   def __init__(self, options={}):
     self.options = options
-    #self.path = options.directory
-    self.path = Testing.LOCAL_RESULTS + "files/"
+    self.path = options.watch
     self.event_handler = TIEHandler(patterns=["*.meta"], ignore_patterns=[], ignore_directories=True)
     self.observer = Observer()
     print "Scanning: ", self.path
