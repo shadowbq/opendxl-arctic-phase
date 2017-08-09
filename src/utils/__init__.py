@@ -25,7 +25,7 @@ def valid_hash(value):
     if not is_md5(value):
         if not is_sha1(value):
             if not is_sha256(value):
-                raise ("%s is an invalid hash (md5|sha1|sha256) value" % value)
+                raise Exception("%s is an invalid hash (md5|sha1|sha256) value" % value)
     return value
 
 def is_sha1(maybe_sha):

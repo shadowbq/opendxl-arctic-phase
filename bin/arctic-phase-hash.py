@@ -37,7 +37,11 @@ if __name__ == '__main__':
     if options.filehash is None:
         options.filehash = raw_input("File Hash: ")
         # this should exit with string
-        utils.valid_hash(options.filehash)
+        try:
+            utils.valid_hash(options.filehash)
+        except Exception as inst:
+            print inst
+            sys.exit(1)    
 
 
     if options.verbosity:
