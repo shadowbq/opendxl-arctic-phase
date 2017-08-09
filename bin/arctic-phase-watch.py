@@ -41,7 +41,7 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
         logger.info("Looking at {0}".format(event.src_path))
         #try:
         sample = self.tieLookup(event.src_path)
-        self.combined_reputation = sample.calcRep(reputations_dict)
+        self.combined_reputation = sample.calcRep()
         sideeffects()
         create_verdict(event.src_path)
         #except:
