@@ -17,7 +17,7 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
 
     def __init__(self, patterns=None, ignore_patterns=None,
                  ignore_directories=False, case_sensitive=False, options=None, client=None):
-        super(PatternMatchingEventHandler, self).__init__()
+        super(watchdog.events.PatternMatchingEventHandler, self).__init__()
 
         self._patterns = patterns
         self._ignore_patterns = ignore_patterns
