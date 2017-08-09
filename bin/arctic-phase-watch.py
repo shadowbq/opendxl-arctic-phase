@@ -35,12 +35,15 @@ from dxltieclient.constants import HashType, ReputationProp, FileProvider, FileE
 
 #import code; code.interact(local=dict(globals(), **locals()))
 
-class TIEHandler(watchdog.events.PatternMatchingEventHandler):
+class JobHandler(watchdog.events.PatternMatchingEventHandler):
 
     def on_created(self, event):
         logger.info("Looking at {0}".format(event.src_path))
         #try:
-        self.tieLookup(event.src_path)
+        sample = self.tieLookup(event.src_path)
+        self.combined_reputation = sample.calcRep(reputations_dict)
+        sideeffects()
+        create_verdict(event.src_path)
         #except:
         #  print "invalid file"
 
@@ -61,13 +64,38 @@ class TIEHandler(watchdog.events.PatternMatchingEventHandler):
                   }
                 sample = TieSubmit(options, client, reputation_lookup_dict)
                 logger.info(sample.tieResponse())
+                return sample
+
+    def sideeffects(self):
+        if self.combined_reputation[0] <= TrustLevel.MOST_LIKELY_TRUSTED:
+            if self.combined_reputation[0] <= TrustLevel.MOST_LIKELY_MALICIOUS:
+                addtosuricatablacklist(dataMap['MD5'])
+                logger.info "added to blacklist"
+            else:
+                if FileProvider.ATD in reputations_dict:
+                    logger.info "ATD Graded it Medium - Malware.Dynamic"
+                else:
+                    logger.info "submit to ATD"
+        else:
+            logger.info "good file"
+
+    def create_verdict(self):
+
+        try:
+            fo = open(filename + '.' + self.combined_reputation[1] + ".verdict", "w")
+            fo.write(output)
+            fo.close()
+        except:
+            logger.info "could not write verdict to directory"
+
+
 
 class ScanFolder:
 
   def __init__(self, options={}):
     self.options = options
     self.path = options.watch
-    self.event_handler = TIEHandler(patterns=["*.meta"], ignore_patterns=[], ignore_directories=True)
+    self.event_handler = JobHandler(patterns=["*.meta"], ignore_patterns=[], ignore_directories=True)
     self.observer = Observer()
     logger.info ("Scanning directory: {}".format(self.path))
     self.observer.schedule(self.event_handler, self.path, recursive=True)

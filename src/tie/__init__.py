@@ -113,7 +113,19 @@ class TieSubmit():
         if FileProvider.GTI in reputations_dict:
           gti_rep = reputations_dict[FileProvider.GTI]
           rep = gti_rep[ReputationProp.TRUST_LEVEL]
-      return rep
+
+      if rep <= TrustLevel.MOST_LIKELY_TRUSTED:
+          if rep <= TrustLevel.MOST_LIKELY_MALICIOUS:
+              rep_str = "bad"
+          else:
+              if FileProvider.ATD in reputations_dict:
+                  rep_str = "medium"
+              else:
+                  rep_str = "unknown"
+      else:
+          rep_str = "good"
+
+      return [rep, rep_str]
 
     def tieResponse(self):
         rtv_string = "File Hash " + self.filehash + " Reputation\n\n"
