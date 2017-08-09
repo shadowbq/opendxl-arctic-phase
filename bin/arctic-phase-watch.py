@@ -37,10 +37,11 @@ class TIEHandler(watchdog.events.PatternMatchingEventHandler):
     def on_created(self, event):
         print "Looking at ", event.src_path
         #try:
-        tieLookup(event.src_path)
+        self.tieLookup(event.src_path)
         #except:
         #  print "invalid file"
-    def tieLookup(filename):
+
+    def tieLookup(self, filename):
         with open(filename, 'r') as stream:
             try:
                 dataMap = yaml.load(stream)
@@ -58,8 +59,6 @@ class TIEHandler(watchdog.events.PatternMatchingEventHandler):
                 sample = TieSubmit(options, client, reputation_lookup_dict)
                 print sample.tieResponse(),
 
-
-
 class ScanFolder:
 
   def __init__(self, options={}):
@@ -68,7 +67,7 @@ class ScanFolder:
     self.path = Testing.LOCAL_RESULTS + "files/"
     self.event_handler = TIEHandler(patterns=["*.meta"], ignore_patterns=[], ignore_directories=True)
     self.observer = Observer()
-    print self.path
+    print "Scanning: ", self.path
     self.observer.schedule(self.event_handler, self.path, recursive=True)
     self.observer.start()
 
