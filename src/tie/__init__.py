@@ -10,6 +10,7 @@ tiescoreMap = {0: 'Not Set', 1: 'Known Malicious', 15: 'Most Likely Malicious', 
 # TIE Provider Map
 providerMap = {1: 'GTI', 3: 'Enterprise Reputation', 5: 'ATD', 7: "MWG"}
 
+#TODO: rename this to TieSample
 class TieSubmit():
     def __init__(self, options, dxlclient, reputation_lookup_dict=None):
         # Create the McAfee Threat Intelligence Exchange (TIE) client
@@ -35,8 +36,12 @@ class TieSubmit():
             self.reputations_dict = self._getFileRep()
 
         self.content = self._getFileProps()
-        #printTIE(reputations_dict)
-        #calcRep(reputations_dict)
+
+    @property
+    def reputations_dict(self):
+        import code; code.interact(local=dict(globals(), **locals()))
+        return self._reputations_dict
+
 
     def _getFileRep(self):
 
