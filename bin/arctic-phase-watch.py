@@ -38,7 +38,7 @@ from dxltieclient.constants import HashType, ReputationProp, FileProvider, FileE
 class TIEHandler(watchdog.events.PatternMatchingEventHandler):
 
     def on_created(self, event):
-        print "Looking at ", event.src_path
+        logger.info("Looking at {0}".format(event.src_path))
         #try:
         self.tieLookup(event.src_path)
         #except:
@@ -49,7 +49,7 @@ class TIEHandler(watchdog.events.PatternMatchingEventHandler):
             try:
                 dataMap = yaml.load(stream)
             except yaml.YAMLError as exc:
-                print(exc)
+                logger.error(exc)
         if dataMap['STATE'] == 'CLOSED':
             p = re.compile('PE32')
             match = p.match(dataMap['MAGIC'])
@@ -60,7 +60,7 @@ class TIEHandler(watchdog.events.PatternMatchingEventHandler):
                     HashType.SHA1: dataMap['SHA1']
                   }
                 sample = TieSubmit(options, client, reputation_lookup_dict)
-                print sample.tieResponse(),
+                logger.info(sample.tieResponse())
 
 class ScanFolder:
 
@@ -69,7 +69,7 @@ class ScanFolder:
     self.path = options.watch
     self.event_handler = TIEHandler(patterns=["*.meta"], ignore_patterns=[], ignore_directories=True)
     self.observer = Observer()
-    print "Scanning: ", self.path
+    logger.info ("Scanning directory: {}".format(self.path))
     self.observer.schedule(self.event_handler, self.path, recursive=True)
     self.observer.start()
 
@@ -93,6 +93,11 @@ class ScanFolder:
 if __name__ == '__main__':
     # Get the list of parameters passed from command line
     options = CliArgs('watch')
+
+    if options.verbosity:
+        logger.setLevel(logging.INFO)
+    else:
+        logger.setLevel(logging.WARNING)
 
     if options.verbosity:
         utils.license()

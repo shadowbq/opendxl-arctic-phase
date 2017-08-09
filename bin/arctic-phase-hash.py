@@ -34,6 +34,11 @@ if __name__ == '__main__':
     # Get the list of parameters passed from command line
     options = CliArgs('hash')
 
+    if options.verbosity:
+        logger.setLevel(logging.INFO)
+    else:
+        logger.setLevel(logging.WARNING)
+
     if options.filehash is None:
         options.filehash = raw_input("Input File Hash: ")
         print "###############"
