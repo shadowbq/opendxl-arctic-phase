@@ -41,11 +41,10 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
         logger.info("Looking at {0}".format(event.src_path))
         #try:
         sample = self.tieLookup(event.src_path)
+
+        #TODO: refactor this ..extract properties etc.
         self.combined_reputation = sample.calcRep()
-
-        print sample.reputations_dict
-
-        self.sideeffects()
+        self.sideeffects(sample.reputations_dict)
         self.create_verdict(event.src_path)
         #except:
         #  print "invalid file"
@@ -75,7 +74,7 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
                 addtosuricatablacklist(dataMap['MD5'])
                 logger.info("added to blacklist")
             else:
-                if FileProvider.ATD in reputations_dict:
+                if FileProvider.ATD in self.sample.reputations_dict:
                     logger.info("ATD Graded it Medium - Malware.Dynamic")
                 else:
                     logger.info("submit to ATD")

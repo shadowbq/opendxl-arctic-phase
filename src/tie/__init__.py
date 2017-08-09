@@ -39,9 +39,7 @@ class TieSubmit():
 
     @property
     def reputations_dict(self):
-        import code; code.interact(local=dict(globals(), **locals()))
         return self._reputations_dict
-
 
     def _getFileRep(self):
 
