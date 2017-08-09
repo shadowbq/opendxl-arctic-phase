@@ -70,14 +70,14 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
         if self.combined_reputation[0] <= TrustLevel.MOST_LIKELY_TRUSTED:
             if self.combined_reputation[0] <= TrustLevel.MOST_LIKELY_MALICIOUS:
                 addtosuricatablacklist(dataMap['MD5'])
-                logger.info "added to blacklist"
+                logger.info("added to blacklist")
             else:
                 if FileProvider.ATD in reputations_dict:
-                    logger.info "ATD Graded it Medium - Malware.Dynamic"
+                    logger.info("ATD Graded it Medium - Malware.Dynamic")
                 else:
-                    logger.info "submit to ATD"
+                    logger.info("submit to ATD")
         else:
-            logger.info "good file"
+            logger.info("good file")
 
     def create_verdict(self):
 
@@ -86,7 +86,7 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
             fo.write(output)
             fo.close()
         except:
-            logger.info "could not write verdict to directory"
+            logger.info("could not write verdict to directory")
 
 
 
