@@ -12,7 +12,7 @@ class DxlConfigWrapper(object):
 
         CONFIG_FILE = self.options.dxlclient
 
-        # TODO: Hardcoded, FIX for TESTING
+        # TODO: Hardcoded, FIX for TESTING and use named_constants
         # CONFIG_FILE_NAME = "dxlclient.config"
         # CONFIG_FILE = os.path.dirname(os.path.abspath(__file__)) + "/../../etc/" + CONFIG_FILE_NAME
         # print "Loading configuration from:", CONFIG_FILE

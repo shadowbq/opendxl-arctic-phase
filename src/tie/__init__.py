@@ -11,26 +11,33 @@ tiescoreMap = {0: 'Not Set', 1: 'Known Malicious', 15: 'Most Likely Malicious', 
 providerMap = {1: 'GTI', 3: 'Enterprise Reputation', 5: 'ATD', 7: "MWG"}
 
 class TieSubmit():
-    def __init__(self, options, dxlclient):
+    def __init__(self, options, dxlclient, reputation_lookup_dict=None):
         # Create the McAfee Threat Intelligence Exchange (TIE) client
         self.tie_client = TieClient(dxlclient)
-        self.filehash = options.filehash
-        if self.filehash == None:
-            return "no file hash"
-        self.reputations_dict = self._getFileRep()
+        self.reputation_lookup_dict = reputation_lookup_dict
+        if self.reputation_lookup_dict:
+            self.reputations_dict = self._getFileRep()
+        else:
+            self.filehash = options.filehash
+            if self.filehash == None:
+                return "no file hash"
+            self.reputations_dict = self._getFileRep()
         self.content = self._getFileProps()
         #printTIE(reputations_dict)
         #calcRep(reputations_dict)
 
     def _getFileRep(self):
-        if utils.is_sha1(self.filehash):
-            reputations_dict = self.tie_client.get_file_reputation({HashType.SHA1: self.filehash})
-        elif utils.is_sha256(self.filehash):
-            reputations_dict = self.tie_client.get_file_reputation({HashType.SHA256: self.filehash})
-        elif utils.is_md5(self.filehash):
-            reputations_dict = self.tie_client.get_file_reputation({HashType.MD5: self.filehash})
+        if self.reputation_lookup_dict:
+            reputations_dict = self.tie_client.get_file_reputation(self.reputation_lookup_dict)
         else:
-            return "not a valid file hash"
+            if utils.is_sha1(self.filehash):
+                reputations_dict = self.tie_client.get_file_reputation({HashType.SHA1: self.filehash})
+            elif utils.is_sha256(self.filehash):
+                reputations_dict = self.tie_client.get_file_reputation({HashType.SHA256: self.filehash})
+            elif utils.is_md5(self.filehash):
+                reputations_dict = self.tie_client.get_file_reputation({HashType.MD5: self.filehash})
+            else:
+                return "not a valid file hash"
         return reputations_dict
 
     def _getFileProps(self):

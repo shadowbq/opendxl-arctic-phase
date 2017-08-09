@@ -129,7 +129,7 @@ class CliArgs():
 
         exclusive = self.parser.add_mutually_exclusive_group()
         exclusive.add_argument('-v', "--verbosity", action="count", help=self.arg_dict['verbosity'])
-        exclusive.add_argument('-q', "--quiet", required=False, action='store_true', dest='quiet', help=self.arg_dict['quiet'])
+        # exclusive.add_argument('-q', "--quiet", required=False, action='store_true', dest='quiet', help=self.arg_dict['quiet'])
 
     def dxl_args(self):
 
