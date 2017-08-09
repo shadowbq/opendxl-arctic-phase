@@ -68,13 +68,13 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
                 logger.info(sample.tieResponse())
                 return sample
 
-    def sideeffects(self):
+    def sideeffects(self, reputations_dict):
         if self.combined_reputation[0] <= TrustLevel.MOST_LIKELY_TRUSTED:
             if self.combined_reputation[0] <= TrustLevel.MOST_LIKELY_MALICIOUS:
                 addtosuricatablacklist(dataMap['MD5'])
                 logger.info("added to blacklist")
             else:
-                if FileProvider.ATD in self.sample.reputations_dict:
+                if FileProvider.ATD in reputations_dict:
                     logger.info("ATD Graded it Medium - Malware.Dynamic")
                 else:
                     logger.info("submit to ATD")
