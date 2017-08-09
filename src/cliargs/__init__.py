@@ -159,9 +159,9 @@ class CliArgs():
             watch_group.add_argument('-e', required=False, action='store_true', dest='existing', help=self.arg_dict['existing'])
 
         if self.dot_arctic_phase['sandbox']:
-            watch_group.add_argument('-w', required=False, action='store_true', default=self.dot_arctic_phase['sandbox'], dest='sandbox', help=self.arg_dict['sandbox'])
+            watch_group.add_argument('-s', required=False, action='store_true', default=self.dot_arctic_phase['sandbox'], dest='sandbox', help=self.arg_dict['sandbox'])
         else:
-            watch_group.add_argument('-w', required=False, action='store_true', dest='sandbox', help=self.arg_dict['sandbox'])
+            watch_group.add_argument('-s', required=False, action='store_true', dest='sandbox', help=self.arg_dict['sandbox'])
 
         if self.dot_arctic_phase['sandboxconfig']:
             watch_group.add_argument('-r', required=False, action='store', default=self.dot_arctic_phase['sandboxconfig'], dest='sandboxconfig', help=self.arg_dict['sandboxconfig'])
