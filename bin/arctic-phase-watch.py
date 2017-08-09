@@ -30,6 +30,9 @@ from dxlclient.client import DxlClient
 from tie import TieSubmit
 from cliargs import CliArgs
 
+from dxltieclient.constants import HashType, ReputationProp, FileProvider, FileEnterpriseAttrib, \
+    CertProvider, CertEnterpriseAttrib, TrustLevel
+
 #import code; code.interact(local=dict(globals(), **locals()))
 
 class TIEHandler(watchdog.events.PatternMatchingEventHandler):
