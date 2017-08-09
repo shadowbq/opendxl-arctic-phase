@@ -12,7 +12,9 @@ import tempfile
 # pip libs
 import yaml
 from named_constants import Constants
-
+import yaml
+from watchdog.observers import Observer
+import watchdog.events
 
 # local libs
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../")
@@ -55,7 +57,7 @@ class TIEHandler(watchdog.events.PatternMatchingEventHandler):
                   }
                 sample = TieSubmit(options, client, reputation_lookup_dict)
                 print sample.tieResponse(),
-                
+
 
 
 class ScanFolder:
