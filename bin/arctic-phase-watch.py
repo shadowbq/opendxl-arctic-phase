@@ -42,8 +42,8 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
         #try:
         sample = self.tieLookup(event.src_path)
         self.combined_reputation = sample.calcRep()
-        sideeffects()
-        create_verdict(event.src_path)
+        self.sideeffects()
+        self.create_verdict(event.src_path)
         #except:
         #  print "invalid file"
 
