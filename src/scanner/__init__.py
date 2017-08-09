@@ -15,6 +15,19 @@ from dxltieclient.constants import HashType, ReputationProp, FileProvider, FileE
 
 class JobHandler(watchdog.events.PatternMatchingEventHandler):
 
+    def __init__(self, patterns=None, ignore_patterns=None,
+                 ignore_directories=False, case_sensitive=False, options=None, client=None):
+        super(PatternMatchingEventHandler, self).__init__()
+
+        self._patterns = patterns
+        self._ignore_patterns = ignore_patterns
+        self._ignore_directories = ignore_directories
+        self._case_sensitive = case_sensitive
+
+        self.options = options
+        self.client = client
+
+
     def on_created(self, event):
         logger.info("Looking at {0}".format(event.src_path))
         #try:
@@ -42,7 +55,7 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
                     HashType.MD5: dataMap['MD5'],
                     HashType.SHA1: dataMap['SHA1']
                   }
-                sample = TieSubmit(options, client, reputation_lookup_dict)
+                sample = TieSubmit(self.options, self.client, reputation_lookup_dict)
                 logger.info(sample.tieResponse())
                 return sample
 
@@ -73,10 +86,10 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
 
 class ScanFolder:
 
-    def __init__(self, options={}):
+    def __init__(self, options={}, client):
         self.options = options
         self.path = options.watch
-        self.event_handler = JobHandler(patterns=["*.meta"], ignore_patterns=[], ignore_directories=True)
+        self.event_handler = JobHandler(patterns=["*.meta"], ignore_patterns=[], ignore_directories=True, case_sensitive=False, options, client)
         self.observer = Observer()
         logger.info ("Scanning directory: {}".format(self.path))
         self.observer.schedule(self.event_handler, self.path, recursive=True)

@@ -52,7 +52,7 @@ if __name__ == '__main__':
     with DxlClient(dxlconfig.config) as client:
         # Connect to the fabric
         client.connect()
-        job = ScanFolder(options)
+        job = ScanFolder(options, client)
         try:
             while True:
                   time.sleep(1)
