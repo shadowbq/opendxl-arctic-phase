@@ -32,8 +32,8 @@ if __name__ == '__main__':
     # Get the list of parameters passed from command line
     options = CliArgs('hash')
 
-    if options.hash is None:
-        options.hash = raw_input("File Hash: ")
+    if options.filehash is None:
+        options.filehash = raw_input("File Hash: ")
 
     if options.verbosity:
         utils.license()

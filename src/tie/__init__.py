@@ -14,8 +14,8 @@ class TieSubmit():
     def __init__(self, options, dxlclient):
         # Create the McAfee Threat Intelligence Exchange (TIE) client
         self.tie_client = TieClient(dxlclient)
-        self.file_hash = options.hash
-        if self.file_hash == None:
+        self.filehash = options.filehash
+        if self.filehash == None:
             return "no file hash"
         self.reputations_dict = self._getFileRep()
         self.content = self._getFileProps()
@@ -23,12 +23,12 @@ class TieSubmit():
         #calcRep(reputations_dict)
 
     def _getFileRep(self):
-        if utils.is_sha1(self.file_hash):
-            reputations_dict = self.tie_client.get_file_reputation({HashType.SHA1: self.file_hash})
-        elif utils.is_sha256(self.file_hash):
-            reputations_dict = self.tie_client.get_file_reputation({HashType.SHA256: self.file_hash})
-        elif utils.is_md5(self.file_hash):
-            reputations_dict = self.tie_client.get_file_reputation({HashType.MD5: self.file_hash})
+        if utils.is_sha1(self.filehash):
+            reputations_dict = self.tie_client.get_file_reputation({HashType.SHA1: self.filehash})
+        elif utils.is_sha256(self.filehash):
+            reputations_dict = self.tie_client.get_file_reputation({HashType.SHA256: self.filehash})
+        elif utils.is_md5(self.filehash):
+            reputations_dict = self.tie_client.get_file_reputation({HashType.MD5: self.filehash})
         else:
             return "not a valid file hash"
         return reputations_dict
@@ -95,7 +95,7 @@ class TieSubmit():
       return rep
 
     def tieResponse(self):
-        rtv_string = "File Hash " + self.file_hash + " Reputation\n"
+        rtv_string = "File Hash " + self.filehash + " Reputation\n"
         # Format a String Response
         i = 1
         for key in self.content:
@@ -106,8 +106,6 @@ class TieSubmit():
             i += 1
 
         return rtv_string
-
-
 
 ## Debug functions
 

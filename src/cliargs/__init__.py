@@ -13,7 +13,7 @@ def valid_cli_hash(value):
     if not utils.is_md5(value):
         if not utils.is_sha1(value):
             if not utils.is_sha256(value):
-                raise argparse.ArgumentTypeError("%s is an invalid hash (md5|sha1|sha256) value" % value)
+                raise argparse.ArgumentTypeError("%s is an invalid file hash (md5|sha1|sha256) value" % value)
     return value
 
 # CLI Tools
@@ -31,7 +31,7 @@ class CliArgs():
         # Complete Arg Dictionary for Help
         self.arg_dict = {
             'config': '(c)onfiguration file for arctic phase\n\t\t(default: %(default)s)',
-            'hash': 'h(a)sh md5|sha1|sha256 to test lookup\n\t\t(default: %(default)s)',
+            'filehash': '(f)ile hash md5|sha1|sha256 to test lookup\n\t\t(default: %(default)s)',
             'dxlclient': 'd(x)lclient.config file location\n\t\t(default: %(default)s)',
             'watch': '(w)atch dir for new suricata meta files (fileXX.meta)\n\t\t(default: %(default)s)',
             'existing': '(e)xisting meta files in watch directory will be evaluated\n\t\t(default: %(default)s)',
@@ -143,7 +143,7 @@ class CliArgs():
     def hash_args(self):
 
         hash_group = self.parser.add_argument_group('Hash parameters')
-        hash_group.add_argument('-a', required=True, type=valid_cli_hash, action='store', dest='hash', help=self.arg_dict['hash'], metavar = "HASH")
+        hash_group.add_argument('-f', required=False, type=valid_cli_hash, action='store', dest='filehash', help=self.arg_dict['filehash'], metavar = "FILEHASH")
 
     def watch_args(self):
 
