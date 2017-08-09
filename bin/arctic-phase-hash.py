@@ -41,14 +41,18 @@ if __name__ == '__main__':
             utils.valid_hash(options.filehash)
         except Exception as inst:
             print inst
-            sys.exit(1)    
+            sys.exit(1)
 
 
     if options.verbosity:
         utils.license()
 
     # Options wrapper for DXLClientConfig
-    dxlconfig = DxlConfigWrapper(options)
+    try:
+        dxlconfig = DxlConfigWrapper(options)
+    except Exception as inst:
+        print inst
+        sys.exit(1)    
 
     # Create the client
     with DxlClient(dxlconfig.config) as client:
