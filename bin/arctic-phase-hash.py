@@ -35,7 +35,8 @@ if __name__ == '__main__':
     options = CliArgs('hash')
 
     if options.filehash is None:
-        options.filehash = raw_input("File Hash: ")
+        options.filehash = raw_input("Input File Hash: ")
+        print "###############"
         # this should exit with string
         try:
             utils.valid_hash(options.filehash)
@@ -52,11 +53,11 @@ if __name__ == '__main__':
         dxlconfig = DxlConfigWrapper(options)
     except Exception as inst:
         print inst
-        sys.exit(1)    
+        sys.exit(1)
 
     # Create the client
     with DxlClient(dxlconfig.config) as client:
       # Connect to the fabric
       client.connect()
       sample = TieSubmit(options, client)
-      print sample.tieResponse()
+      print sample.tieResponse(),

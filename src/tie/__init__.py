@@ -95,7 +95,7 @@ class TieSubmit():
       return rep
 
     def tieResponse(self):
-        rtv_string = "File Hash " + self.filehash + " Reputation\n"
+        rtv_string = "File Hash " + self.filehash + " Reputation\n\n"
         # Format a String Response
         i = 1
         for key in self.content:
