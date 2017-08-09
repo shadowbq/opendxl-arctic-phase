@@ -86,10 +86,10 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
 
 class ScanFolder:
 
-    def __init__(self, options={}, client):
+    def __init__(self, options={}, client=None):
         self.options = options
         self.path = options.watch
-        self.event_handler = JobHandler(patterns=["*.meta"], ignore_patterns=[], ignore_directories=True, case_sensitive=False, options, client)
+        self.event_handler = JobHandler(patterns=["*.meta"], ignore_patterns=[], ignore_directories=True, case_sensitive=False, options=options, client=client)
         self.observer = Observer()
         logger.info ("Scanning directory: {}".format(self.path))
         self.observer.schedule(self.event_handler, self.path, recursive=True)
