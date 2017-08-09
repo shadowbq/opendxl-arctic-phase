@@ -18,15 +18,12 @@ class TieSubmit():
 
         # TODO:Refactor this
         self.reputation_lookup_dict = reputation_lookup_dict
-
-        import code; code.interact(local=dict(globals(), **locals()))
-
         if self.reputation_lookup_dict:
             try:
-                self.filehash = reputation_lookup_dict['MD5']
+                self.filehash = reputation_lookup_dict['md5']
             except:
                 try:
-                    self.filehash = reputation_lookup_dict['SHA1']
+                    self.filehash = reputation_lookup_dict['sha1']
                 except:
                     self.filehash = "unknown"
 
