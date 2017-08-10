@@ -78,10 +78,10 @@ ENV/
 /site
 
 
-etc/certs
-etc/dxlclient.config
+test/etc/certs
+test/etc/dxlclient.config
 
 #Keep what we got ignore the rest
-var/log/suricata/files
+test/var/log/suricata/files
 
-# git update-index  --skip-worktree etc/suricata/blacklist.md5
+# git update-index  --skip-worktree test/etc/suricata/blacklist.md5

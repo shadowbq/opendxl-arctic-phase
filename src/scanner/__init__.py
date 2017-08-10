@@ -8,7 +8,7 @@ from common import *
 from watchdog.observers import Observer
 import watchdog.events
 
-from tie import TieSubmit
+from tie import TieSample
 from dxltieclient.constants import HashType, ReputationProp, FileProvider, FileEnterpriseAttrib, \
     CertProvider, CertEnterpriseAttrib, TrustLevel
 
@@ -55,7 +55,7 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
                     HashType.MD5: dataMap['MD5'],
                     HashType.SHA1: dataMap['SHA1']
                   }
-                sample = TieSubmit(self.options, self.client, reputation_lookup_dict)
+                sample = TieSample(self.options, self.client, reputation_lookup_dict)
                 logger.info(sample.tieResponse())
                 return sample
 

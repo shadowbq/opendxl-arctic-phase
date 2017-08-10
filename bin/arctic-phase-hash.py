@@ -25,7 +25,7 @@ from utils import *
 from const import *
 from dxlwrapper import DxlConfigWrapper
 from dxlclient.client import DxlClient
-from tie import TieSubmit
+from tie import TieSample
 from cliargs import CliArgs
 
 #import code; code.interact(local=dict(globals(), **locals()))
@@ -64,5 +64,5 @@ if __name__ == '__main__':
     with DxlClient(dxlconfig.config) as client:
       # Connect to the fabric
       client.connect()
-      sample = TieSubmit(options, client)
+      sample = TieSample(options, client)
       print sample.tieResponse(),

@@ -7,6 +7,6 @@ class ArcticPhase(Constants):
 # Constantsclass Colors(Constants):
 class Testing(Constants):
     VERBOSE = 0
-    LOCAL_SAMPLES="samples/"
-    LOCAL_RESULTS="/opt/opendxl-arctic-phase/var/log/suricata/"
-    BLACKLIST="etc/suricata/blacklist.md5"
+    LOCAL_SAMPLES="test/samples/"
+    LOCAL_RESULTS="test/var/log/suricata/"
+    BLACKLIST="test/etc/suricata/blacklist.md5"

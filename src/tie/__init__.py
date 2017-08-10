@@ -11,7 +11,7 @@ tiescoreMap = {0: 'Not Set', 1: 'Known Malicious', 15: 'Most Likely Malicious', 
 providerMap = {1: 'GTI', 3: 'Enterprise Reputation', 5: 'ATD', 7: "MWG"}
 
 #TODO: rename this to TieSample
-class TieSubmit():
+class TieSample():
     def __init__(self, options, dxlclient, reputation_lookup_dict=None):
         # Create the McAfee Threat Intelligence Exchange (TIE) client
         self.tie_client = TieClient(dxlclient)

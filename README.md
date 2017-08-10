@@ -10,7 +10,7 @@ This is a set of configurations and clients to integrate Suricata file carving
 
 ```
 ./bin/arctic-phase-hash.py --help
-Loading configuration from: /home/shadowbq/sandbox/foo/opendxl-arctic-phase/src/../etc/dxlclient.config
+Loading configuration from: /home/shadowbq/sandbox/foo/opendxl-arctic-phase/src/../test/etc/dxlclient.config
 usage: arctic-phase-hash.py [-h] [-x DXLCLIENT] -a HASH [--version] [-v | -q]
 
 OpenDXL Arctic Phase - Hash integrations
