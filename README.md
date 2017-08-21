@@ -43,6 +43,8 @@ Suricata 3.2 & 4.0 Configs
 File Hashes:
 Feature #509: add SHA1 and SHA256 checksum support for files
 
+Running Suricata as test
+see: https://github.com/jasonish/suricata-verify
 
 ## Invoke
 
