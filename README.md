@@ -32,6 +32,34 @@ Hash parameters:
                    		(default: None)
 ```
 
+```
+opendxl-arctic-phase$ ./bin/arctic-phase-hash.py -x /opt/opendxl/dxlclient.config -f C2FBCC87C157F4F70515A69199E50F82
+File Hash C2FBCC87C157F4F70515A69199E50F82 Reputation
+
+Provider: GTI
+Creation Date: 2017-08-09 08:08:55
+Reputation: Not Set
+
+Provider: Enterprise Reputation
+Creation Date: 2017-08-09 08:08:55
+Reputation: Not Set
+
+opendxl-arctic-phase$ ./bin/arctic-phase-hash.py -x /opt/opendxl/dxlclient.config -f 91E9E3CC7A1843027AC77377144566CE
+File Hash 91E9E3CC7A1843027AC77377144566CE Reputation
+
+Provider: GTI
+Creation Date: 2017-08-01 17:23:17
+Reputation: Known Malicious
+
+Provider: Enterprise Reputation
+Creation Date: 2017-08-01 17:23:17
+Reputation: Not Set
+
+Provider: ATD
+Creation Date: 2017-08-01 17:23:17
+Reputation: Known Malicious
+```
+
 ### OpenDXL
 
 DXL configuration:
