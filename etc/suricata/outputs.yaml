@@ -11,6 +11,10 @@ outputs:
       # perform file extraction. Set to 0 for unlimited.
       stream-depth: 0
       #waldo: file.waldo # waldo file to store the file_id across runs
+      # Write meta is on by default, when file-store is enabled.
+      #write-meta: no 
+
+  # although the below file-log is not needed, it can be helpful
 
   # output module to log files tracked in a easily parsable json format
   - file-log:
