@@ -12,6 +12,7 @@ from tie import TieSample
 from dxltieclient.constants import HashType, ReputationProp, FileProvider, FileEnterpriseAttrib, \
     CertProvider, CertEnterpriseAttrib, TrustLevel
 
+from suricata import addtosuricatablacklist
 
 class JobHandler(watchdog.events.PatternMatchingEventHandler):
 
@@ -26,12 +27,14 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
 
         self.options = options
         self.client = client
+        self.query = {}
 
 
     def on_created(self, event):
         logger.info("Looking at {0}".format(event.src_path))
         #try:
-        sample = self.tieLookup(event.src_path)
+        self.query = self.create_query(event.src_path)
+        sample = self.tieLookup()
 
         #TODO: refactor this ..extract properties etc.
         self.combined_reputation = sample.calcRep()
@@ -40,7 +43,7 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
         #except:
         #  print "invalid file"
 
-    def tieLookup(self, filename):
+    def create_query(self, filename):
         with open(filename, 'r') as stream:
             try:
                 dataMap = yaml.load(stream)
@@ -55,14 +58,17 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
                     HashType.MD5: dataMap['MD5'],
                     HashType.SHA1: dataMap['SHA1']
                   }
-                sample = TieSample(self.options, self.client, reputation_lookup_dict)
-                logger.info(sample.tieResponse())
-                return sample
+                return reputation_lookup_dict
+
+    def tieLookup(self):
+        sample = TieSample(self.options, self.client, self.query)
+        logger.info(sample.tieResponse())
+        return sample
 
     def sideeffects(self, reputations_dict):
         if self.combined_reputation[0] <= TrustLevel.MOST_LIKELY_TRUSTED:
             if self.combined_reputation[0] <= TrustLevel.MOST_LIKELY_MALICIOUS:
-                addtosuricatablacklist(dataMap['MD5'])
+                addtosuricatablacklist(self.query['md5'])
                 logger.info("added to blacklist")
             else:
                 if FileProvider.ATD in reputations_dict:
