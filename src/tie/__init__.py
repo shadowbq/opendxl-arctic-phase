@@ -108,22 +108,27 @@ class TieSample():
       if FileProvider.ENTERPRISE in reputations_dict:
           ent_rep = reputations_dict[FileProvider.ENTERPRISE]
           rep = ent_rep[ReputationProp.TRUST_LEVEL]
+          warning_provider = FileProvider.ENTERPRISE
           if rep == 0:
             if FileProvider.ATD in reputations_dict:
               atd_rep = reputations_dict[FileProvider.ATD]
               rep = atd_rep[ReputationProp.TRUST_LEVEL]
+              warning_provider = FileProvider.ATD
             if rep == 0:
               if FileProvider.MWG in reputations_dict:
                 mwg_rep = reputations_dict[FileProvider.MWG]
                 rep = atd_rep[ReputationProp.TRUST_LEVEL]
+                warning_provider = FileProvider.MWG
               if rep == 0:
                 if FileProvider.GTI in reputations_dict:
                   gti_rep = reputations_dict[FileProvider.GTI]
                   rep = gti_rep[ReputationProp.TRUST_LEVEL]
+                  warning_provider = FileProvider.GTI
       else:
         if FileProvider.GTI in reputations_dict:
           gti_rep = reputations_dict[FileProvider.GTI]
           rep = gti_rep[ReputationProp.TRUST_LEVEL]
+          warning_provider = FileProvider.GTI
 
       if rep <= TrustLevel.MOST_LIKELY_TRUSTED:
           if rep <= TrustLevel.MOST_LIKELY_MALICIOUS:
@@ -136,7 +141,7 @@ class TieSample():
       else:
           rep_str = "good"
 
-      return [rep, rep_str]
+      return [rep, rep_str, warning_provider]
 
     def tieResponse(self):
         rtv_string = "File Hash " + self.filehash + " Reputation\n\n"

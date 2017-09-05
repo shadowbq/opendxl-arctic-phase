@@ -12,7 +12,7 @@ from tie import TieSample
 from dxltieclient.constants import HashType, ReputationProp, FileProvider, FileEnterpriseAttrib, \
     CertProvider, CertEnterpriseAttrib, TrustLevel
 
-from suricata import addtosuricatablacklist
+from suricata import addtosuricatablacklist, SuricataEve
 
 class JobHandler(watchdog.events.PatternMatchingEventHandler):
 
@@ -33,7 +33,8 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
     def on_created(self, event):
         logger.info("Looking at {0}".format(event.src_path))
         #try:
-        self.query = self.create_query(event.src_path)
+        self.metaFile = self.load_metaFile(event.src_path)
+        self.query = self.create_query()
         sample = self.tieLookup()
 
         #TODO: refactor this ..extract properties etc.
@@ -43,20 +44,22 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
         #except:
         #  print "invalid file"
 
-    def create_query(self, filename):
+    def load_metaFile(self, filename):
         with open(filename, 'r') as stream:
             try:
-                dataMap = yaml.load(stream)
+                return yaml.load(stream)
             except yaml.YAMLError as exc:
                 logger.error(exc)
-        if dataMap['STATE'] == 'CLOSED':
+
+    def create_query(self):
+        if self.metaFile['STATE'] == 'CLOSED':
             p = re.compile('PE32')
-            match = p.match(dataMap['MAGIC'])
+            match = p.match(self.metaFile['MAGIC'])
             if match:
                 reputation_lookup_dict = \
                   {
-                    HashType.MD5: dataMap['MD5'],
-                    HashType.SHA1: dataMap['SHA1']
+                    HashType.MD5: self.metaFile['MD5'],
+                    HashType.SHA1: self.metaFile['SHA1']
                   }
                 return reputation_lookup_dict
 
@@ -69,14 +72,22 @@ class JobHandler(watchdog.events.PatternMatchingEventHandler):
         if self.combined_reputation[0] <= TrustLevel.MOST_LIKELY_TRUSTED:
             if self.combined_reputation[0] <= TrustLevel.MOST_LIKELY_MALICIOUS:
                 addtosuricatablacklist(self.query['md5'])
+                self.create_eve()
                 logger.info("added to blacklist")
             else:
                 if FileProvider.ATD in reputations_dict:
+                    self.create_eve()
                     logger.info("ATD Graded it Medium - Malware.Dynamic")
                 else:
                     logger.info("submit to ATD")
         else:
             logger.info("good file")
+
+    def create_eve(self):
+        #try:
+        SuricataEve(self.metaFile, self.combined_reputation)
+        #except:
+        #    logger.info("could not write eve alert to output")
 
     def create_verdict(self, filename, reputations_dict):
 

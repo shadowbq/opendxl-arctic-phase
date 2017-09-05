@@ -1,6 +1,18 @@
 # Suricata methods
 import os
 import json
+import yaml
+from datetime import datetime
+
+from common import *
+
+# TIE Provider Map
+providerMap = {1: 'GTI', 3: 'Enterprise Reputation', 5: 'ATD', 7: 'MWG'}
+gid = 969
+severityMap = {'unknown': 0, 'bad':1, 'medium':2, 'good':3}
+protoMap = {6: 'TCP', 17: 'UDP'}
+BlacklistFile="/etc/suricata/rules/blacklist.md5"
+AlertFile="/var/log/suricata/tieAlerts.eve.json"
 
 """
 
@@ -46,11 +58,9 @@ SID 10's digit is the products / 1's digit is the verdict
 "signature": "McAfee TIE - Medium file reputation identified by GTI",
 """
 
-BLACKLIST="/etc/suricata/rules/blacklist.md5"
-
 def addtosuricatablacklist(md5):
   try:
-      blacklist_fh = open(BLACKLIST, "a")
+      blacklist_fh = open(BlacklistFile, "a")
       blacklist_fh.write(md5)
       blacklist_fh.write("\n")
       blacklist_fh.close()
@@ -60,24 +70,42 @@ def addtosuricatablacklist(md5):
 
 class SuricataEve(object):
 
-    def __init__(self, options):
+    def __init__(self, metaFile, reputation):
+        timestamp = datetime.now().strftime('%Y-%m-%dT%H:%M:%S.%f')
+        sig = self.build_signature(reputation)
         eve_dict = \
           {
-              "timestamp": "2009-11-24T21:27:09.534255",
+              "timestamp": timestamp,
               "event_type": "alert",
-              "src_ip": "192.168.2.7",
-              "src_port": 1041,
-              "dest_ip": "x.x.250.50",
-              "dest_port": 80,
-              "proto": "TCP",
+              "src_ip": metaFile["SRC IP"],
+              "src_port": metaFile["SRC PORT"],
+              "dest_ip": metaFile["DST IP"],
+              "dest_port": metaFile["DST PORT"],
+              "proto": protoMap[metaFile["PROTO"]],
               "alert": {
                   "action": "allowed",
-                  "gid": 1,
-                  "signature_id" :2001999,
-                  "rev": 9,
-                  "signature": "ET MALWARE BTGrab.com Spyware Downloading Ads",
+                  "gid": gid,
+                  "signature_id" :sig['sig_id'],
+                  "rev": 1,
+                  "signature": sig['signature'],
                   "category": "A Network Trojan was detected",
                   "severity": 1
               }
           }
-        print json.dumps(eve_dict, sort_keys=True, indent=4, separators=(',', ': '))
+
+        logger.warning(json.dumps(eve_dict, sort_keys=True, indent=4, separators=(',', ': ')))
+        self.add_to_alert_file(json.dumps(eve_dict, separators=(',',':')))
+
+    def build_signature(self, reputation):
+        #import code; code.interact(local=dict(globals(), **locals()))
+        sig_id = reputation[2]*10 + severityMap[reputation[1]]
+        return {'sig_id': sig_id, 'signature': 'McAfee TIE - '+ reputation[1] +' file reputation identified by ' + providerMap[reputation[2]]}
+
+    def add_to_alert_file(self, jsonAlert):
+      try:
+          alertfile_fh = open(AlertFile, "a")
+          alertfile_fh.write(jsonAlert)
+          alertfile_fh.write("\n")
+          alertfile_fh.close()
+      except:
+          print "suricata alert file is not available"
