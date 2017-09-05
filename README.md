@@ -6,6 +6,8 @@ This is a set of configurations and clients to integrate Suricata file carving
 
 ## Usage
 
+https://asciinema.org/a/R5tOtMtUJTBq54SCVYMRReGX9
+
 ### Hash Lookup
 
 ```
