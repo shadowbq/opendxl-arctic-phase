@@ -9,7 +9,7 @@ OPENDXL suricata tie atd integration client. Includes suricata config examples e
 
 AUTHOR = 'shadowbq'
 AUTHOR_EMAIL = 'shadowbq@gmail.com'
-LICENSE = 'MIT'
+LICENSE = 'APACHE'
 PLATFORM = "ANY"
 URL = 'https://github.com/shadowbq/articphase'
 
