@@ -6,6 +6,8 @@
 ##
 #-e .[docs,test]
 
+# PipDeps
+named_constants
 
 # Toolsets
 pycodestyle
@@ -21,3 +23,13 @@ pathtools
 urllib3
 requests==2.7.0
 watchdog==0.8.3
+
+# Testing
+rednose
+nose
+nose-regression
+nose-watch
+tox
+
+# Coverage Climate
+coverage
