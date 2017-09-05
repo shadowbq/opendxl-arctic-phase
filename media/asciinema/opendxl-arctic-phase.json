@@ -1,0 +1,246 @@
+{
+  "stdout": [
+    [
+      0.003511,
+      "\u001b[3J\u001b[H\u001b[2J"
+    ],
+    [
+      0.074379,
+      "\u001b[?1049h\u001b(B\u001b[m\u001b[?1l\u001b>\u001b[H\u001b[2J\u001b[?12l\u001b[?25h\u001b[?1000l\u001b[?1002l\u001b[?1006l\u001b[?1005l\u001b]112\u0007\u001b[?25l\u001b[1;1H\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[30m\u001b[42m[0] 0:bash*                                                                                                                                                                                                                                           \"suricata\" 16:04 05-Sep-17\u001b(B\u001b[m\u001b[70;1H\u001b[1;70r\u001b[H\u001b[?12l\u001b[?25h\u001b[1;69rshadowbq@suricata:~$ \u001b[1;70r\u001b[H\u001b[21C"
+    ],
+    [
+      0.884332,
+      "\u001b[?25l\u001b[115C│\u001b[2;137H│\u001b[3;137H│\u001b[4;137H│\u001b[5;137H│\u001b[6;137H│\u001b[7;137H│\u001b[8;137H│\u001b[9;137H│\u001b[10;137H│\u001b[11;137H│\u001b[12;137H│\u001b[13;137H│\u001b[14;137H│\u001b[15;137H│\u001b[16;137H│\u001b[17;137H│\u001b[18;137H│\u001b[19;137H│\u001b[20;137H│\u001b[21;137H│\u001b[22;137H│\u001b[23;137H│\u001b[24;137H│\u001b[25;137H│\u001b[26;137H│\u001b[27;137H│\u001b[28;137H│\u001b[29;137H│\u001b[30;137H│\u001b[31;137H│\u001b[32;137H│\u001b[33;137H│\u001b[34;137H│\u001b[35;137H│\u001b[32m\u001b[36;137H│\u001b[37;137H│\u001b[38;137H│\u001b[39;137H│\u001b[40;137H│\u001b[41;137H│\u001b[42;137H│\u001b[43;137H│\u001b[44;137H│\u001b[45;137H│\u001b[46;137H│\u001b[47;137H│\u001b[48;137H│\u001b[49;137H│\u001b[50;137H│\u001b[51;137H│\u001b[52;137H│\u001b[53;137H│\u001b[54;137H│\u001b[55;137H│\u001b[56;137H│\u001b[57;137H│\u001b[58;137H│\u001b[59;137H│\u001b[60;137H│\u001b[61;137H│\u001b[62;137H│\u001b[63;137H│\u001b[64;137H│\u001b[65;137H│\u001b[66;137H│\u001b[67;137H│\u001b[68;137H│\u001b[69;137H│\u001b[H\u001b(B\u001b[mshadowbq@suricata:~$                                                                                                                    \r\n                                                 "
+    ],
+    [
+      0.000123,
+      "                                                                                       \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                           "
+    ],
+    [
+      0.000214,
+      "                             \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                           "
+    ],
+    [
+      0.000209,
+      "                                                                                                             \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                     "
+    ],
+    [
+      8.2e-05,
+      "                                                   \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n     "
+    ],
+    [
+      0.001008,
+      "                                                                                                                                   \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                               "
+    ],
+    [
+      8.3e-05,
+      "                                                                         \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                         "
+    ],
+    [
+      5.3e-05,
+      "               \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                         "
+    ],
+    [
+      4.3e-05,
+      "                                                                                               \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                   "
+    ],
+    [
+      6.3e-05,
+      "                                     \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                                                                                                                                        \r\n                   "
+    ],
+    [
+      4.2e-05,
+      "                                                                                                                     \u001b[1;138H\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\n\u001b[K\r\n\u001b[30m\u001b[42m[0] 0:bash*                                                                                                                                                                                                                                           \"suricata\" 16:04 05-Sep-17\u001b(B\u001b[m\u001b[1;138H\u001b[?12l\u001b[?25h\u001b[1;69r\u001b[H\u001b[137Cshadowbq@suricata:~$ \u001b[1;70r\u001b[H\u001b[158C"
+    ],
+    [
+      1.353975,
+      "\u001b[1;69r\u001b[H\u001b[158Ca\u001b[1;70r\u001b[H\u001b[159C"
+    ],
+    [
+      0.215095,
+      "\u001b[1;69r\u001b[H\u001b[159Cr\u001b[1;70r\u001b[H\u001b[160C"
+    ],
+    [
+      0.235831,
+      "\u001b[1;69r\u001b[H\u001b[160Cc\u001b[1;70r\u001b[H\u001b[161C"
+    ],
+    [
+      0.244138,
+      "\u0007"
+    ],
+    [
+      0.410166,
+      "\u001b[2;138H\u001b[1;69r\u001b[H\u001b[2;138Harch                      arctic-phase-watch        arctic-phase-watch-quiet  \u001b[3;138Hshadowbq@suricata:~$ arc\u001b[1;70r\u001b[H\u001b[3;162H"
+    ],
+    [
+      0.862732,
+      "\u001b[1;69r\u001b[H\u001b[3;162Ht\u001b[1;70r\u001b[H\u001b[3;163H"
+    ],
+    [
+      0.260705,
+      "\u001b[1;69r\u001b[H\u001b[3;163Hic-phase-watch\u0007\u001b[1;70r\u001b[H\u001b[3;177H"
+    ],
+    [
+      0.938518,
+      "\u001b[4;138H"
+    ],
+    [
+      0.074642,
+      "\u001b[1;69r\u001b[H\u001b[4;138H[sudo] password for shadowbq: \u001b[1;70r\u001b[H\u001b[4;168H"
+    ],
+    [
+      1.054995,
+      "\u001b[7;138H"
+    ],
+    [
+      0.100953,
+      "\u001b[1;69r\u001b[H\u001b[7;138H# Author - Shadowbq 2017\u001b[8;138H# Apache LICENSE\u001b[9;138Hhttps://github.com/shadowbq/opendxl-arctic-phase/blob/master/LICENSE\u001b[1;70r\u001b[H\u001b[10;138H"
+    ],
+    [
+      0.035373,
+      "\u001b[1;69r\u001b[H\u001b[10;138H2017-09-05 16:04:58,919 dxlclient.client - INFO - Waiting for broker list...\u001b[1;70r\u001b[H\u001b[10;214H\u001b[11;138H\u001b[1;69r\u001b[H\u001b[11;138H2017-09-05 16:04:58,922 dxlclient.client - INFO - Trying to connect...\u001b[1;70r\u001b[H\u001b[11;208H\u001b[12;138H\u001b[1;69r\u001b[H\u001b[12;138H2017-09-05 16:04:58,922 dxlclient.client - INFO - Trying to connect to broker {Unique id: {5855c456-8e79-11e7-1544-000c290ae5e8}, Host \u001b[13;138Hname: dxl-broker-1.vanillasystem.com, IP address: 10.0.3.20, Port: 8883}...\u001b[1;70r\u001b[H\u001b[13;213H\u001b[14;138H\u001b[1;69r\u001b[H\u001b[14;138H2017-09-05 16:04:58,937 dxlclient.client - INFO - Connected to broker {5855c456-8e79-11e7-1544-000c290ae5e8}\u001b[1;70r\u001b[H\u001b[14;246H\u001b[15;138H"
+    ],
+    [
+      0.036482,
+      "\u001b[1;69r\u001b[H\u001b[15;138H2017-09-05 16:04:58,951 root - INFO - Scanning directory: /var/log/suricata/files/\u001b[1;70r\u001b[H\u001b[16;138H"
+    ],
+    [
+      1.348643,
+      "\u001b[?25l\u001b[70;1H\u001b[30m\u001b[42m[0] 0:bash*                                                                                                                                                                                                                                           \"suricata\" 16:05 05-Sep-17\u001b(B\u001b[m\u001b[16;138H\u001b[?12l\u001b[?25h"
+    ],
+    [
+      0.575392,
+      "\u001b[?25l\u001b[32m\u001b[1;137H│\u001b[2;137H│\u001b[3;137H│\u001b[4;137H│\u001b[5;137H│\u001b[6;137H│\u001b[7;137H│\u001b[8;137H│\u001b[9;137H│\u001b[10;137H│\u001b[11;137H│\u001b[12;137H│\u001b[13;137H│\u001b[14;137H│\u001b[15;137H│\u001b[16;137H│\u001b[17;137H│\u001b[18;137H│\u001b[19;137H│\u001b[20;137H│\u001b[21;137H│\u001b[22;137H│\u001b[23;137H│\u001b[24;137H│\u001b[25;137H│\u001b[26;137H│\u001b[27;137H│\u001b[28;137H│\u001b[29;137H│\u001b[30;137H│\u001b[31;137H│\u001b[32;137H│\u001b[33;137H│\u001b[34;137H│\u001b[35;137H│\u001b[39m\u001b[36;137H│\u001b[37;137H│\u001b[38;137H│\u001b[39;137H│\u001b[40;137H│\u001b[41;137H│\u001b[42;137H│\u001b[43;137H│\u001b[44;137H│\u001b[45;137H│\u001b[46;137H│\u001b[47;137H│\u001b[48;137H│\u001b[49;137H│\u001b[50;137H│\u001b[51;137H│\u001b[52;137H│\u001b[53;137H│\u001b[54;137H│\u001b[55;137H│\u001b[56;137H│\u001b[57;137H│\u001b[58;137H│\u001b[59;137H│\u001b[60;137H│\u001b[61;137H│\u001b[62;137H│\u001b[63;137H│\u001b[64;137H│\u001b[65;137H│\u001b[66;137H│\u001b[67;137H│\u001b[68;137H│\u001b[69;137H│\u001b(B\u001b[m\u001b[1;22H\u001b[?12l\u001b[?25h"
+    ],
+    [
+      0.922351,
+      "\u001b[H                                                                                                                                        \u001b[1;69r\u001b[Hshadowbq@suricata:~$ \u001b[1;70r\u001b[H\u001b[21C\u001b[1;69r\u001b[H\u001b[21Cs\u001b[1;70r\u001b[H\u001b[22C"
+    ],
+    [
+      0.111093,
+      "\u001b[1;69r\u001b[H\u001b[22Cu\u001b[1;70r\u001b[H\u001b[23C"
+    ],
+    [
+      0.080685,
+      "\u001b[1;69r\u001b[H\u001b[23Cr\u001b[1;70r\u001b[H\u001b[24C"
+    ],
+    [
+      0.192952,
+      "\u001b[1;69r\u001b[H\u001b[24Cicata\u0007\u001b[1;70r\u001b[H\u001b[29C"
+    ],
+    [
+      0.900432,
+      "\u001b[1;69r\u001b[H\u001b[29C-\u001b[1;70r\u001b[H\u001b[30C"
+    ],
+    [
+      0.131981,
+      "\u001b[1;69r\u001b[H\u001b[30Creplay \u001b[1;70r\u001b[H\u001b[37C"
+    ],
+    [
+      0.555669,
+      "\r\n"
+    ],
+    [
+      0.07328,
+      "\u001b[1;69r\u001b[H\r\n[sudo] password for shadowbq: \u001b[1;70r\u001b[H\u001b[2;31H"
+    ],
+    [
+      1.073995,
+      "\r\n"
+    ],
+    [
+      0.07448,
+      "\u001b[1;69r\u001b[H\u001b[2B\u001b[32m5/9/2017 -- 16:05:10\u001b[39m - <\u001b[33m\u001b[1mNotice\u001b(B\u001b[m> - \u001b[33mThis is Suricata version 4.0.0 RELEASE\u001b[1;70r\u001b[H\u001b[3;73H\u001b(B\u001b[m\r\n"
+    ],
+    [
+      1.803573,
+      "\u001b[1;69r\u001b[H\u001b[3B\u001b[32m5/9/2017 -- 16:05:15\u001b[39m - <\u001b[33m\u001b[1mNotice\u001b(B\u001b[m> - \u001b[33mall 3 packet processing threads, 4 management threads initialized, engine started.\u001b[1;70r\u001b[H\u001b[4B\u001b(B\u001b[m"
+    ],
+    [
+      0.072453,
+      "\u001b[1;69r\u001b[H\u001b[4B\u001b[32m5/9/2017 -- 16:05:15\u001b[39m - <\u001b[33m\u001b[1mNotice\u001b(B\u001b[m> - \u001b[33mSignal Received.  Stopping engine.\u001b[1;70r\u001b[H\u001b[5B\u001b(B\u001b[m"
+    ],
+    [
+      0.072971,
+      "\u001b[1;69r\u001b[H\u001b[5B\u001b[32m5/9/2017 -- 16:05:16\u001b[39m - <\u001b[33m\u001b[1mNotice\u001b(B\u001b[m> - \u001b[33mPcap-file module read 1266 packets, 1262569 bytes\u001b[1;70r\u001b[H\u001b[6B\u001b(B\u001b[m"
+    ],
+    [
+      0.388251,
+      "\u001b[1;69r\u001b[H\u001b[16;138H2017-09-05 16:05:16,469 root - INFO - Looking at /var/log/suricata/files/file.1.meta\u001b[1;70r\u001b[H\u001b[6B"
+    ],
+    [
+      0.075843,
+      "\u001b[1;69r\u001b[H\u001b[17;138H2017-09-05 16:05:16,539 root - INFO - File Hash 54cb91395cdaad9d47882533c21fc0e9 Reputation\u001b[19;138HProvider: GTI\u001b[20;138HCreation Date: 2017-08-31 17:53:31\u001b[21;138HReputation: Known Trusted\u001b[23;138HProvider: Enterprise Reputation\u001b[24;138HCreation Date: 2017-08-31 17:53:31\u001b[25;138HReputation: Not Set\u001b[1;70r\u001b[H\u001b[6B\u001b[1;69r\u001b[H\u001b[28;138H2017-09-05 16:05:16,539 root - INFO - good file\u001b[1;70r\u001b[H\u001b[6B\u001b[1;69r\u001b[H\u001b[29;138H2017-09-05 16:05:16,540 root - INFO - Looking at /var/log/suricata/files/file.2.meta\u001b[1;70r\u001b[H\u001b[6B"
+    ],
+    [
+      0.072813,
+      "\u001b[1;69r\u001b[H\u001b[30;138H2017-09-05 16:05:16,608 root - INFO - File Hash 91e9e3cc7a1843027ac77377144566ce Reputation\u001b[32;138HProvider: GTI\u001b[33;138HCreation Date: 2017-08-31 18:27:43\u001b[34;138HReputation: Known Malicious\u001b[36;138HProvider: Enterprise Reputation\u001b[37;138HCreation Date: 2017-08-31 18:27:43\u001b[38;138HReputation: Not Set\u001b[1;70r\u001b[H\u001b[6B\u001b[1;69r\u001b[H\u001b[41;138H2017-09-05 16:05:16,608 root - WARNING - {\u001b[42;138H    \"alert\": {\u001b[43;138H        \"action\": \"allowed\",\u001b[44;138H        \"category\": \"A Network Trojan was detected\",\u001b[45;138H        \"gid\": 969,\u001b[46;138H        \"rev\": 1,\u001b[47;138H        \"severity\": 1,\u001b[48;138H        \"signature\": \"McAfee TIE - bad file reputation identified by GTI\",\u001b[49;138H        \"signature_id\": 11\u001b[50;138H    },\u001b[51;138H    \"dest_ip\": \"10.0.3.3\",\u001b[52;138H    \"dest_port\": 34132,\u001b[53;138H    \"event_type\": \"alert\",\u001b[54;138H    \"proto\": \"TCP\",\u001b[55;138H    \"src_ip\": \"10.0.10.192\",\u001b[56;138H    \"src_port\": 80,\u001b[57;138H    \"timestamp\": \"2017-09-05T16:05:16.608792\"\u001b[58;138H}\u001b[1;70r\u001b[H\u001b[6B\u001b[1;69r\u001b[H\u001b[59;"
+    ],
+    [
+      0.0001,
+      "138H2017-09-05 16:05:16,609 root - INFO - added to blacklist\u001b[1;70r\u001b[H\u001b[6B"
+    ],
+    [
+      1.511708,
+      "\u001b[1;69r\u001b[H\u001b[6B-rw-r--r-- 1 root root 854072 Sep  5 16:05 /var/log/suricata/files/file.1\u001b[1;70r\u001b[H\u001b[7;74H\r\n\u001b[1;69r\u001b[H\u001b[7B-rw-r--r-- 1 root root    610 Sep  5 16:05 /var/log/suricata/files/file.1.meta\u001b[1;70r\u001b[H\u001b[8;79H\r\n\u001b[1;69r\u001b[H\u001b[8B-rw-r--r-- 1 root root    507 Sep  5 16:05 /var/log/suricata/files/file.1.meta.good.verdict\u001b[1;70r\u001b[H\u001b[9;92H\r\n\u001b[1;69r\u001b[H\u001b[9B-rw-r--r-- 1 root root 324096 Sep  5 16:05 /var/log/suricata/files/file.2\u001b[1;70r\u001b[H\u001b[10;74H\r\n\u001b[1;69r\u001b[H\u001b[10B-rw-r--r-- 1 root root    641 Sep  5 16:05 /var/log/suricata/files/file.2.meta\u001b[1;70r\u001b[H\u001b[11;79H\r\n\u001b[1;69r\u001b[H\u001b[11B-rw-r--r-- 1 root root    506 Sep  5 16:05 /var/log/suricata/files/file.2.meta.bad.verdict\u001b[1;70r\u001b[H\u001b[12;91H\r\n"
+    ],
+    [
+      0.070167,
+      "\u001b[1;69r\u001b[H\u001b[12B{\"src_ip\":\"10.0.10.192\",\"src_port\":80,\"event_type\":\"alert\",\"alert\":{\"category\":\"A Network Trojan was detected\",\"severity\":1,\"rev\":1,\"gid\r\n\":969,\"signature\":\"McAfee TIE - bad file reputation identified by GTI\",\"action\":\"allowed\",\"signature_id\":11},\"proto\":\"TCP\",\"timestamp\":\"\r\n2017-09-05T16:05:16.608792\",\"dest_port\":34132,\"dest_ip\":\"10.0.3.3\"}\u001b[1;70r\u001b[H\u001b[15B\u001b[1;69r\u001b[H\u001b[15Bshadowbq@suricata:~$ \u001b[1;70r\u001b[H\u001b[16;22H"
+    ],
+    [
+      2.471725,
+      "\u001b[1;69r\u001b[H\u001b[16;22He\u001b[1;70r\u001b[H\u001b[16;23H"
+    ],
+    [
+      0.678809,
+      "\u001b[1;69r\u001b[H\u001b[16;23Hx\u001b[1;70r\u001b[H\u001b[16;24H"
+    ],
+    [
+      0.161945,
+      "\u001b[1;69r\u001b[H\u001b[16;24Hi\u001b[1;70r\u001b[H\u001b[16;25H"
+    ],
+    [
+      0.182674,
+      "\u001b[1;69r\u001b[H\u001b[16;25Ht\u001b[1;70r\u001b[H\u001b[16;26H"
+    ],
+    [
+      0.623532,
+      "\u001b[1;69r\u001b[H\u001b[16Blogout\u001b[1;70r\u001b[H\u001b[17B\u001b[?25l\u001b[Hshadowbq@suricata:~$ arc\u001b[K\r\narch                      arctic-phase-watch        arctic-phase-watch-quiet  \u001b[K\r\nshadowbq@suricata:~$ arctic-phase-watch\u001b[K\r\n[sudo] password for shadowbq: \u001b[K\r\nSorry, try again.\u001b[K\r\n[sudo] password for shadowbq: \u001b[K\r\n# Author - Shadowbq 2017\u001b[K\r\n# MIT LICENSE\u001b[K\r\nhttps://github.com/shadowbq/opendxl-arctic-phase/blob/master/LICENSE\u001b[K\r\n2017-09-05 16:04:58,919 dxlclient.client - INFO - Waiting for broker list...\u001b[K\r\n2017-09-05 16:04:58,922 dxlclient.client - INFO - Trying to connect...\u001b[K\r\n2017-09-05 16:04:58,922 dxlclient.client - INFO - Trying to connect to broker {Unique id: {5855c456-8e79-11e7-1544-000c290ae5e8}, Host name: dxl-broker-1.vanillasystem.com, IP address: 10.0.3.20, Port: 8883}...\u001b[K\r\n2017-09-05 16:04:58,937 dxlclient.client - INFO - Connected to broker {5855c456-8e79-11e7-1544-000c290ae5e8}\u001b[K\r\n2017-09-05 16:04:58,951 root - INFO - Scanning directory: /var/log/suricata/files/\u001b[K\r\n2017-09-05 16:05:16,469 root - INFO - Lo"
+    ],
+    [
+      8e-05,
+      "oking at /var/log/suricata/files/file.1.meta\u001b[K\r\n2017-09-05 16:05:16,539 root - INFO - File Hash 54cb91395cdaad9d47882533c21fc0e9 Reputation\u001b[K\r\n\u001b[K\r\nProvider: GTI\u001b[K\r\nCreation Date: 2017-08-31 17:53:31\u001b[K\r\nReputation: Known Trusted\u001b[K\r\n\u001b[K\r\nProvider: Enterprise Reputation\u001b[K\r\nCreation Date: 2017-08-31 17:53:31\u001b[K\r\nReputation: Not Set\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n2017-09-05 16:05:16,539 root - INFO - good file\u001b[K\r\n2017-09-05 16:05:16,540 root - INFO - Looking at /var/log/suricata/files/file.2.meta\u001b[K\r\n2017-09-05 16:05:16,608 root - INFO - File Hash 91e9e3cc7a1843027ac77377144566ce Reputation\u001b[K\r\n\u001b[K\r\nProvider: GTI\u001b[K\r\nCreation Date: 2017-08-31 18:27:43\u001b[K\r\nReputation: Known Malicious\u001b[K\r\n\u001b[K\r\nProvider: Enterprise Reputation\u001b[K\r\nCreation Date: 2017-08-31 18:27:43\u001b[K\r\nReputation: Not Set\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n2017-09-05 16:05:16,608 root - WARNING - {\u001b[K\r\n    \"alert\": {\u001b[K\r\n        \"action\": \"allowed\",\u001b[K\r\n        \"category\": \"A Network Trojan was detected\",\u001b[K\r\n        \"gid\": 969,\u001b[K\r\n        \"rev\": 1,\u001b[K\r\n        \"severity\": 1,\u001b[K\r"
+    ],
+    [
+      2.6e-05,
+      "\n        \"signature\": \"McAfee TIE - bad file reputation identified by GTI\",\u001b[K\r\n        \"signature_id\": 11\u001b[K\r\n    },\u001b[K\r\n    \"dest_ip\": \"10.0.3.3\",\u001b[K\r\n    \"dest_port\": 34132,\u001b[K\r\n    \"event_type\": \"alert\",\u001b[K\r\n    \"proto\": \"TCP\",\u001b[K\r\n    \"src_ip\": \"10.0.10.192\",\u001b[K\r\n    \"src_port\": 80,\u001b[K\r\n    \"timestamp\": \"2017-09-05T16:05:16.608792\"\u001b[K\r\n}\u001b[K\r\n2017-09-05 16:05:16,609 root - INFO - added to blacklist\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[K\r\n\u001b[30m\u001b[42m[0] 0:bash*                                                                                                                                                                                                                                           \"suricata\" 16:05 05-Sep-17\u001b(B\u001b[m\u001b[59;1H\u001b[?12l\u001b[?25h"
+    ],
+    [
+      0.035005,
+      "\u001b[1;69r\u001b[H\u001b[59d^C\u001b[1;70r\u001b[H\u001b[59;3H"
+    ],
+    [
+      0.797563,
+      "\u001b[1;69r\u001b[H\u001b[59;3Hshadowbq@suricata:~$ \u001b[1;70r\u001b[H\u001b[59;24H"
+    ],
+    [
+      0.167961,
+      "\r\n"
+    ],
+    [
+      0.003511,
+      "\u001b[3J\u001b[H\u001b[2J"
+    ]
+  ],
+  "width": 272,
+  "title": null,
+  "command": null,
+  "version": 1,
+  "height": 70,
+  "duration": 102.534833,
+  "env": {
+    "TERM": "xterm-256color",
+    "SHELL": "/bin/bash"
+  }
+}
