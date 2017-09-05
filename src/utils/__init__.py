@@ -9,7 +9,7 @@ from const import Testing
 
 def license():
     print '# Author - Shadowbq 2017'
-    print '# MIT LICENSE'
+    print '# APACHE 2.0 LICENSE'
     print 'https://github.com/shadowbq/opendxl-arctic-phase/blob/master/LICENSE'
 
 def verbose(x, y=0):
