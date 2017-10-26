@@ -133,7 +133,7 @@ class CliArgs():
 
     def dxl_args(self):
 
-        dxl_group = self.parser.add_argument_group('OpenDXL parametervalid_hashs')
+        dxl_group = self.parser.add_argument_group('OpenDXL parameters')
 
         if self.dot_arctic_phase['dxlclient']:
             dxl_group.add_argument('-x', required=False, action='store', default=self.dot_arctic_phase['dxlclient'], dest='dxlclient', help=self.arg_dict['dxlclient'])
