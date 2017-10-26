@@ -1,8 +1,16 @@
 {
   "stdout": [
     [
-      0.34127,
+      0.004127,
       "\r\n"
+    ],
+    [
+      0.00984461,
+      "opensource -(c)2017 - Apache2 Lic - https://github.com/shadowbq/opendxl-arctic-phase"
+    ],
+    [
+      0.84127,
+      "\r\n\r\n"
     ],
     [
       0.228508,
@@ -2989,8 +2997,20 @@
       "\u001b[38;5;83m \u001b[0m"
     ],
     [
-      3.40000,
+      0.40000,
       "\u001b[38;5;83m \u001b[0m\r\n"
+    ],
+    [
+      0.004127,
+      "\r\n"
+    ],
+    [
+      0.00984461,
+      "\u001b[38;5;39m °°ArcticPhase :: An OpenDXL, Suricata, McAfee(R) Threat Intelligence Exchange (TIE) Demo\u001b[0m"
+    ],
+    [
+      4.004127,
+      "\r\n"
     ],
     [
       0.003511,
@@ -3058,7 +3078,7 @@
     ],
     [
       0.235831,
-      "\u001b[1;69r\u001b[H\u001b[160Ct\u001b[1;70r\u001b[H\u001b[161C"
+      "\u001b[1;69r\u001b[H\u001b[161Ct\u001b[1;70r\u001b[H\u001b[162C"
     ],
     [
       0.244138,

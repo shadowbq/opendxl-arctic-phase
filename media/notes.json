@@ -1,0 +1,34 @@
+{
+  "command": null,
+  "height": 70,
+  "version": 1,
+  "stdout": [
+    [
+      0.007782,
+      "shadowbq@octothorpe:~/sandbox/opendxl-arctic-phase/media$ "
+    ],
+    [
+      1.984461,
+      "opensource - 2017 - Apache2 - https://github.com/shadowbq/opendxl-arctic-phase"
+    ],
+    [
+      1.548943,
+      "\r\n"
+    ],
+    [
+      0.119095,
+      "opensource: command not found\r\n"
+    ],
+    [
+      0.008972,
+      "shadowbq@octothorpe:~/sandbox/opendxl-arctic-phase/media$ "
+    ]
+  ],
+  "title": null,
+  "duration": 3.672423,
+  "width": 272,
+  "env": {
+    "TERM": "xterm-256color",
+    "SHELL": "/bin/bash"
+  }
+}
