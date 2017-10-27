@@ -6,7 +6,7 @@ This is a set of binaries, configurations and apiclients to integrate Suricata f
 
 ## Usage
 
-[![asciicast](https://asciinema.org/a/cby9v8v0qr8XeqlKvf6fqG0VP.png)](https://asciinema.org/a/cby9v8v0qr8XeqlKvf6fqG0VP?autoplay=1)
+[![asciicast](media/opendxl-arctic-phase.png)](https://asciinema.org/a/cby9v8v0qr8XeqlKvf6fqG0VP?autoplay=1)
 
 ### Hash Lookup
 
